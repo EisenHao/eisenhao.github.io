@@ -2218,6 +2218,9 @@ pre code {
 .post-meta-item-icon {
   margin-right: 3px;
 }
+.post-meta-item-text {
+  display: none;
+}
 @media (max-width: 991px) {
   .post-meta-item-text {
     display: none;
@@ -2926,7 +2929,7 @@ mark.search-keyword {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #ff81ff;
+  background: #8c7edf;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2958,9 +2961,12 @@ mark.search-keyword {
   background-image: linear-gradient(90deg, #f79533 0%, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%);
   height: 3px;
 }
-.container .header-inner {
+.header .header-inner {
   padding-top: 0px;
   width: 100%;
+}
+.site-brand-container {
+  padding: 0 0px;
 }
 .site-meta {
   text-align: center;
@@ -2985,15 +2991,21 @@ mark.search-keyword {
   padding-bottom: 10px;
   letter-spacing: 1px;
   font-style: italic;
+  margin: 10px 0px 0px 20px;
+}
+.menu {
+  margin: 20px 0px 0px 0px;
+  padding: 0;
+  text-align: center;
+}
+.post-block:first-of-type {
+  padding-top: 60px;
 }
 .main-inner {
   padding-bottom: 30px;
 }
-.main-inner .content-wrap .content {
-  padding-top: 0px;
-}
-.content .posts-expand {
-  padding-top: 20px;
+.posts-expand .post-header {
+  margin-bottom: 30px;
 }
 .posts-expand .post-meta {
   margin: 3px 0 60px 0;
@@ -3016,6 +3028,9 @@ img.img-topic {
 }
 .popular-posts .popular-posts-item .popular-posts-title a:hover {
   color: #5073b8;
+}
+.post-tags {
+  margin-top: 30px;
 }
 .pagination {
   border-top: 0px solid #eee;
@@ -3107,45 +3122,67 @@ img.img-topic {
 .tag-cloud-tags a:hover {
   border-bottom: 1px solid #a166ab;
 }
+.posts-collapse {
+  margin: 0 auto;
+  width: 700px;
+}
 .posts-collapse .collection-title .collection-header {
   font-size: 0.9em;
   color: rgba(0,0,0,0.5);
 }
-.posts-collapse {
-  margin: 0px 0px;
-}
-.posts-collapse::before {
+.posts-collapse .post-content::before {
+  content: ' ';
+  height: 100%;
   margin-left: -2px;
+  position: absolute;
+  top: 1.25em;
+  width: 4px;
   background-image: linear-gradient(180deg, #f79533 0, #f37055 15%, #ef4e7b 30%, #a166ab 44%, #5073b8 58%, #1098ad 72%, #07b39b 86%, #6dba82 100%);
 }
-.posts-collapse .collection-title::before {
+.posts-collapse .post-content .collection-title::before {
   background-color: #8fbc8b;
   box-shadow: 0px 0px 10px 0px rgba(255,255,255,0.25);
 }
-.posts-collapse .collection-year::before {
+.posts-collapse .post-content .collection-year::before {
   background-color: #8fbc8b;
 }
-.posts-collapse .post-header:hover::before {
-  background-color: #a166ab;
+.posts-collapse .post-content .post-header::before {
+  background: #bbb;
+  border: 1px solid #fff;
+  border-radius: 50%;
+  content: ' ';
+  height: 6px;
+  left: 0;
+  margin-left: 10px;
+  position: absolute;
+  top: 1.8em;
+  transition-property: background;
+  width: 6px;
+  transition-delay: 0s;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
 }
-.posts-collapse .collection-year {
+.posts-collapse .post-content .post-header::hover {
+  color: #a166ab;
+}
+.posts-collapse .post-content .collection-year {
   margin: 40px 0px;
 }
-.posts-collapse .collection-year h1,
-.posts-collapse .collection-title h2 {
+.posts-collapse .post-content .collection-header {
   color: rgba(0,0,0,0.5);
 }
-.post-block .posts-collapse article {
+.posts-collapse .post-content .post-header {
   margin-top: 25px;
   margin-bottom: 0px;
-  padding: 15px 20px 12px 20px;
+  padding: 15px 20px 12px 25px;
   border-radius: 0px 5px 5px 0px;
   box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.3);
   background-color: #fff;
 }
-.post-block .posts-collapse .post-header .post-header {
+.post-block .posts-collapse .post-header {
   margin: 0px 0px 0px 30px;
   padding: 0px;
+  padding-left: 15px;
   font-weight: normal;
   line-height: inherit;
 }
@@ -3158,10 +3195,13 @@ img.img-topic {
   font-weight: normal;
   line-height: inherit;
 }
-.posts-collapse .post-title a {
+.posts-collapse .post-content .post-title a,
+.posts-collapse .post-content .post-title span.exturl {
+  border-bottom: none;
   color: #5073b8;
 }
-.posts-collapse .post-title a:hover {
+.posts-collapse .post-content .post-title a:hover {
+  border-bottom: none;
   color: #a166ab;
 }
 .sidebar-nav li {
@@ -3171,6 +3211,11 @@ img.img-topic {
 }
 .sidebar-nav li:hover {
   color: #ebebeb;
+}
+.sidebar-toc-active .sidebar-nav-toc,
+.sidebar-overview-active .sidebar-nav-overview {
+  border-bottom-color: #909090;
+  color: #909090;
 }
 .sidebar-nav .sidebar-nav-active {
   color: #909090;
