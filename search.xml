@@ -1597,7 +1597,7 @@ Fork仓库是对应官方源仓库的一份完全备份（类似快照，但却�
 </ol>
 <h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><ol>
 <li>测试没问题后，我们就生成静态网页文件发布至我们的Github pages 中。<figure class="highlight c"><figcaption><span>命令执行目录：~/你的博客站点根目录</span></figcaption><table><tr><td class="code"><pre><span class="line">$ cd /home/eisenhao/eisenhao.github.io</span><br><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure></li>
-<li>可能会要求输入github账号密码：<a href="mailto:&#x65;&#x69;&#49;&#x33;&#57;&#x31;&#49;&#x34;&#x36;&#x38;&#51;&#55;&#48;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#x6d;">&#x65;&#x69;&#49;&#x33;&#57;&#x31;&#49;&#x34;&#x36;&#x38;&#51;&#55;&#48;&#x40;&#103;&#x6d;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#x6d;</a></li>
+<li>可能会要求输入github账号密码：<a href="mailto:&#101;&#x69;&#49;&#51;&#57;&#49;&#49;&#52;&#x36;&#x38;&#51;&#x37;&#48;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;">&#101;&#x69;&#49;&#51;&#57;&#49;&#49;&#52;&#x36;&#x38;&#51;&#x37;&#48;&#x40;&#x67;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#111;&#109;</a></li>
 <li>如果上传失败显示如下信息,可能是由于我们没有配置root环境中的GitHub账号global<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** 请告诉我你是谁。</span><br><span class="line"></span><br><span class="line">运行</span><br><span class="line"></span><br><span class="line">  git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">  git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br><span class="line">来设置您账号的缺省身份标识。</span><br><span class="line">如果仅在本仓库设置身份标识，则省略 --global 参数。</span><br><span class="line"></span><br><span class="line">fatal: 无法自动探测邮件地址（得到 &#39;root@g510.(none)&#39;）</span><br><span class="line">Username for &#39;https:&#x2F;&#x2F;github.com&#39;: ei13911468370@gmail.com</span><br><span class="line">Password for &#39;https:&#x2F;&#x2F;ei13911468370@gmail.com@github.com&#39;: </span><br><span class="line">Everything up-to-date</span><br><span class="line">分支 &#39;master&#39; 设置为跟踪来自 &#39;https:&#x2F;&#x2F;github.com&#x2F;EisenHao&#x2F;eisenhao.github.io.git&#39; 的远程分支 &#39;master&#39;。</span><br><span class="line">INFO  Deploy done: git</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li>按照提示配置一下GitHub的global账号即可.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1673,12 +1673,12 @@ Fork仓库是对应官方源仓库的一份完全备份（类似快照，但却�
     <title>恋爱观</title>
     <url>/2018/04/24/talkAboutLoveCiteByAnonymousSenior/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/talkAboutLoveCiteByAnonymousSenior.jpg" class="full-image" />
-<div id="aplayer-HsNaevHT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+<div id="aplayer-yweayWqb" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
 				<pre class="aplayer-lrc-content">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</pre>
 			</div>
 			<script>
 				var ap = new APlayer({
-					element: document.getElementById("aplayer-HsNaevHT"),
+					element: document.getElementById("aplayer-yweayWqb"),
 					narrow: false,
 					autoplay: false,
 					showlrc: 2,
@@ -3419,12 +3419,12 @@ PAM方法于1987年提出用于l1范数和其他距离的工作。 k-medoid是�
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 网易云网页版关于&quot;陈芳语-爱你&quot;的歌曲id&#x3D;22852057</span><br><span class="line">http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3 #可直接播放外链</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg #封面图</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc #歌词 &#x2F;&#x2F;暂时无法添加lrc歌词，只能内嵌歌词</span><br></pre></td></tr></table></figure>
 <h2 id="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："><a href="#下方测试插件插入音乐（无歌词，lrc方式歌词失效）：" class="headerlink" title="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："></a>下方测试插件插入音乐（无歌词，lrc方式歌词失效）：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayer &quot;爱你&quot; &quot;陈芳语&quot; &quot;http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg&quot; &quot;lrc:https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc&quot; %&#125;</span><br></pre></td></tr></table></figure>
 
-        <div id="aplayer-CZoCCdNP" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-QQdqJZde" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-CZoCCdNP"),
+            element: document.getElementById("aplayer-QQdqJZde"),
             narrow: false,
             autoplay: false,
             showlrc: 3,
@@ -3441,12 +3441,12 @@ PAM方法于1987年提出用于l1范数和其他距离的工作。 k-medoid是�
         </script>
 
 <h2 id="下方测试插件插入内嵌音乐歌词："><a href="#下方测试插件插入内嵌音乐歌词：" class="headerlink" title="下方测试插件插入内嵌音乐歌词："></a>下方测试插件插入内嵌音乐歌词：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayerlrc &quot;爱你&quot; &quot;陈芳语&quot; &quot;http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.coding.net&#x2F;p&#x2F;eisenhao&#x2F;d&#x2F;eisenhao&#x2F;git&#x2F;raw&#x2F;master&#x2F;uploads&#x2F;loveYou.jpg&quot; %&#125;</span><br><span class="line">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</span><br><span class="line">&#123;% endaplayerlrc %&#125;</span><br></pre></td></tr></table></figure>
-<div id="aplayer-nDKBPnNu" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+<div id="aplayer-oeCbwIKO" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
 				<pre class="aplayer-lrc-content">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</pre>
 			</div>
 			<script>
 				var ap = new APlayer({
-					element: document.getElementById("aplayer-nDKBPnNu"),
+					element: document.getElementById("aplayer-oeCbwIKO"),
 					narrow: false,
 					autoplay: false,
 					showlrc: 2,
