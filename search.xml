@@ -726,33 +726,6 @@ ID3算法最早是由罗斯昆（J.Ross Quinlan）于1975年在悉尼大学提�
       </tags>
   </entry>
   <entry>
-    <title>龙应台与儿子对话--“读书的理解”</title>
-    <url>/2017/11/12/Meanning-reading/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/Meanning-reading.jpg" class="full-image" />
-孩子，我要求你读书用功，不是因为我要你跟别人比成绩，而是因为，我希望你将来会拥有选择的权利。选择有意义、有时间的工作，而不是被迫谋生。当你的工作在你心中有意义，你就有成就感。当你的工作给你时间，不剥夺你的生活，你就有尊严。成就感和尊严，给你快乐。
-<a id="more"></a>
-你说：“妈，你要清楚接受一个事实，就是你有一个极其平庸的儿子。我觉得你将来的事业一定比不上你，也比不上爸爸--你们俩都有博士学位，我可能会变成一个很普通的人，有很普通的学历，很普通的职业，不太有钱，也没有名。一个最最平庸的人。”
-
-<p>我可以现在告诉你：我真的不在乎你是否有成就。对我最重要的，不是你有否成就，而是你是否快乐。假如横在你眼前的选择是到华尔街做银行经理或者到动物园做照顾狮子河马的管理员，而你是一个喜欢动物研究的人，我就完全不认为银行经理比较有成就，或者狮子河马的管理员“平庸”。每天为钱的数字起伏而紧张而斗争，很可能不如每天给大象洗澡，给河马刷牙。</p>
-<p>那么，在什么情况下我们才会与别人比名利？</p>
-<p>最好的答案是：在我们内心无处寄托的情况之下。</p>
-<p>怎么才能让我们的心灵有一个寄托，要么你经历过很多很多的事，要么你读过很多很多的书。水木然认为，作为年轻的一代，我们虽然无法像上一代那么淡定，因为经历是无法安装的，但是我们却可以的很多很多的书，让自己变的淡定而优雅。</p>
-<p>再换一个角度来看：我们活在这个世界上，最划算的上就是读书，因为那都是前人智慧的积累，很多东西经历的几百年才成为真理，变成白纸黑字流传下来，而我们只需要几天时间就消化成自己的知识、见识，变成智慧储存起来，何乐而不为？</p>
-<blockquote class="blockquote-center">
-<p>阅读，才是这个世界上收益最高的买卖！<br>很多有成就的人，也都是因为站在了巨人的肩膀上，吸纳了前人的大智慧。</p>
-
-</blockquote>
-
-<div align = right>----龙应台</div>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>阅读</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>最小堆与最大堆</title>
     <url>/2018/10/16/MinHeapAndMaxHeap/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/MinHeapAndMaxHeap.jpg" class="full-image" />
@@ -780,6 +753,33 @@ ID3算法最早是由罗斯昆（J.Ross Quinlan）于1975年在悉尼大学提�
       </categories>
       <tags>
         <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>龙应台与儿子对话--“读书的理解”</title>
+    <url>/2017/11/12/Meanning-reading/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/Meanning-reading.jpg" class="full-image" />
+孩子，我要求你读书用功，不是因为我要你跟别人比成绩，而是因为，我希望你将来会拥有选择的权利。选择有意义、有时间的工作，而不是被迫谋生。当你的工作在你心中有意义，你就有成就感。当你的工作给你时间，不剥夺你的生活，你就有尊严。成就感和尊严，给你快乐。
+<a id="more"></a>
+你说：“妈，你要清楚接受一个事实，就是你有一个极其平庸的儿子。我觉得你将来的事业一定比不上你，也比不上爸爸--你们俩都有博士学位，我可能会变成一个很普通的人，有很普通的学历，很普通的职业，不太有钱，也没有名。一个最最平庸的人。”
+
+<p>我可以现在告诉你：我真的不在乎你是否有成就。对我最重要的，不是你有否成就，而是你是否快乐。假如横在你眼前的选择是到华尔街做银行经理或者到动物园做照顾狮子河马的管理员，而你是一个喜欢动物研究的人，我就完全不认为银行经理比较有成就，或者狮子河马的管理员“平庸”。每天为钱的数字起伏而紧张而斗争，很可能不如每天给大象洗澡，给河马刷牙。</p>
+<p>那么，在什么情况下我们才会与别人比名利？</p>
+<p>最好的答案是：在我们内心无处寄托的情况之下。</p>
+<p>怎么才能让我们的心灵有一个寄托，要么你经历过很多很多的事，要么你读过很多很多的书。水木然认为，作为年轻的一代，我们虽然无法像上一代那么淡定，因为经历是无法安装的，但是我们却可以的很多很多的书，让自己变的淡定而优雅。</p>
+<p>再换一个角度来看：我们活在这个世界上，最划算的上就是读书，因为那都是前人智慧的积累，很多东西经历的几百年才成为真理，变成白纸黑字流传下来，而我们只需要几天时间就消化成自己的知识、见识，变成智慧储存起来，何乐而不为？</p>
+<blockquote class="blockquote-center">
+<p>阅读，才是这个世界上收益最高的买卖！<br>很多有成就的人，也都是因为站在了巨人的肩膀上，吸纳了前人的大智慧。</p>
+
+</blockquote>
+
+<div align = right>----龙应台</div>
+]]></content>
+      <categories>
+        <category>生活</category>
+      </categories>
+      <tags>
+        <tag>阅读</tag>
       </tags>
   </entry>
   <entry>
@@ -922,6 +922,24 @@ Time: 20190123
       </tags>
   </entry>
   <entry>
+    <title>七次省视自己的灵魂--卡里·纪伯伦</title>
+    <url>/2017/03/21/Save-your-soul-seven-times/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/Save-your-soul-seven-times.jpg" class="full-image" />
+发现自己的缺点并直视才是真的勇士。我曾七次鄙视自己的灵魂：
+<a id="more"></a>
+<blockquote class="blockquote-center">
+<p><strong>第一次</strong>，当它本可进取时，却故作谦卑<br><strong>第二次</strong>，当它在空虚时，用爱欲来填充<br><strong>第三次</strong>，在困难和容易之间，它选择了容易<br><strong>第四次</strong>，它犯了错，却借由别人也会犯错来宽慰自己<br><strong>第五次</strong>，它自由软弱，却把它认为是生命的坚韧<br><strong>第六次</strong>，当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副<br><strong>第七次</strong>，它侧身于生活的污泥中，虽不甘心，却又畏首畏尾</p>
+<div align = right>--卡里·纪伯伦</div>
+</blockquote>
+]]></content>
+      <categories>
+        <category>心灵成长</category>
+      </categories>
+      <tags>
+        <tag>人生哲理</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Fork仓库同步官方源仓库的更新</title>
     <url>/2019/11/18/RefreshForkRepositorie/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/RefreshForkRepositorie.png" class="full-image" />
@@ -960,24 +978,6 @@ Fork仓库是对应官方源仓库的一份完全备份（类似快照，但却�
       </categories>
       <tags>
         <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>七次省视自己的灵魂--卡里·纪伯伦</title>
-    <url>/2017/03/21/Save-your-soul-seven-times/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/Save-your-soul-seven-times.jpg" class="full-image" />
-发现自己的缺点并直视才是真的勇士。我曾七次鄙视自己的灵魂：
-<a id="more"></a>
-<blockquote class="blockquote-center">
-<p><strong>第一次</strong>，当它本可进取时，却故作谦卑<br><strong>第二次</strong>，当它在空虚时，用爱欲来填充<br><strong>第三次</strong>，在困难和容易之间，它选择了容易<br><strong>第四次</strong>，它犯了错，却借由别人也会犯错来宽慰自己<br><strong>第五次</strong>，它自由软弱，却把它认为是生命的坚韧<br><strong>第六次</strong>，当它鄙夷一张丑恶的嘴脸时，却不知那正是自己面具中的一副<br><strong>第七次</strong>，它侧身于生活的污泥中，虽不甘心，却又畏首畏尾</p>
-<div align = right>--卡里·纪伯伦</div>
-</blockquote>
-]]></content>
-      <categories>
-        <category>心灵成长</category>
-      </categories>
-      <tags>
-        <tag>人生哲理</tag>
       </tags>
   </entry>
   <entry>
@@ -1553,25 +1553,6 @@ Fork仓库是对应官方源仓库的一份完全备份（类似快照，但却�
       </tags>
   </entry>
   <entry>
-    <title>简易随手记</title>
-    <url>/2017/01/01/messageBoard/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/messageBoard.jpg" class="full-image" />
-一个临时留言板，记录琐碎内容或抓住突发灵感，我的临时随手记！
-藏这么深，我的小秘密应该没那么容易被发现吧😜2333
-<a id="more"></a>
-<blockquote class="blockquote-center">
-<p>当夫运思落笔时，觉心手间勃勃欲发之势，便是机神初到之候。<br>– by 沈宗骞</p>
-
-</blockquote>
-]]></content>
-      <categories>
-        <category>生活</category>
-      </categories>
-      <tags>
-        <tag>Hexo</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>基于Hexo的博客文章编写＆调试＆发布步骤</title>
     <url>/2018/08/29/post-debugging-steps/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/post-debugging-steps.png" class="full-image" />
@@ -1597,7 +1578,7 @@ Fork仓库是对应官方源仓库的一份完全备份（类似快照，但却�
 </ol>
 <h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><ol>
 <li>测试没问题后，我们就生成静态网页文件发布至我们的Github pages 中。<figure class="highlight c"><figcaption><span>命令执行目录：~/你的博客站点根目录</span></figcaption><table><tr><td class="code"><pre><span class="line">$ cd /home/eisenhao/eisenhao.github.io</span><br><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure></li>
-<li>可能会要求输入github账号密码：<a href="mailto:&#x65;&#x69;&#x31;&#51;&#x39;&#49;&#49;&#x34;&#x36;&#x38;&#51;&#x37;&#48;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#99;&#111;&#109;">&#x65;&#x69;&#x31;&#51;&#x39;&#49;&#49;&#x34;&#x36;&#x38;&#51;&#x37;&#48;&#x40;&#x67;&#109;&#x61;&#x69;&#108;&#46;&#99;&#111;&#109;</a></li>
+<li>可能会要求输入github账号密码：<a href="mailto:&#x65;&#105;&#49;&#51;&#57;&#x31;&#x31;&#52;&#54;&#56;&#51;&#x37;&#48;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;">&#x65;&#105;&#49;&#51;&#57;&#x31;&#x31;&#52;&#54;&#56;&#51;&#x37;&#48;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#x6d;</a></li>
 <li>如果上传失败显示如下信息,可能是由于我们没有配置root环境中的GitHub账号global<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** 请告诉我你是谁。</span><br><span class="line"></span><br><span class="line">运行</span><br><span class="line"></span><br><span class="line">  git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">  git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br><span class="line">来设置您账号的缺省身份标识。</span><br><span class="line">如果仅在本仓库设置身份标识，则省略 --global 参数。</span><br><span class="line"></span><br><span class="line">fatal: 无法自动探测邮件地址（得到 &#39;root@g510.(none)&#39;）</span><br><span class="line">Username for &#39;https:&#x2F;&#x2F;github.com&#39;: ei13911468370@gmail.com</span><br><span class="line">Password for &#39;https:&#x2F;&#x2F;ei13911468370@gmail.com@github.com&#39;: </span><br><span class="line">Everything up-to-date</span><br><span class="line">分支 &#39;master&#39; 设置为跟踪来自 &#39;https:&#x2F;&#x2F;github.com&#x2F;EisenHao&#x2F;eisenhao.github.io.git&#39; 的远程分支 &#39;master&#39;。</span><br><span class="line">INFO  Deploy done: git</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li>按照提示配置一下GitHub的global账号即可.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1615,6 +1596,25 @@ Fork仓库是对应官方源仓库的一份完全备份（类似快照，但却�
 ]]></content>
       <categories>
         <category>技术</category>
+      </categories>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>简易随手记</title>
+    <url>/2017/01/01/messageBoard/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/messageBoard.jpg" class="full-image" />
+一个临时留言板，记录琐碎内容或抓住突发灵感，我的临时随手记！
+藏这么深，我的小秘密应该没那么容易被发现吧😜2333
+<a id="more"></a>
+<blockquote class="blockquote-center">
+<p>当夫运思落笔时，觉心手间勃勃欲发之势，便是机神初到之候。<br>– by 沈宗骞</p>
+
+</blockquote>
+]]></content>
+      <categories>
+        <category>生活</category>
       </categories>
       <tags>
         <tag>Hexo</tag>
@@ -1673,12 +1673,12 @@ Fork仓库是对应官方源仓库的一份完全备份（类似快照，但却�
     <title>恋爱观</title>
     <url>/2018/04/24/talkAboutLoveCiteByAnonymousSenior/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/talkAboutLoveCiteByAnonymousSenior.jpg" class="full-image" />
-<div id="aplayer-RjcOqVto" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+<div id="aplayer-ixZOggaN" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
 				<pre class="aplayer-lrc-content">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</pre>
 			</div>
 			<script>
 				var ap = new APlayer({
-					element: document.getElementById("aplayer-RjcOqVto"),
+					element: document.getElementById("aplayer-ixZOggaN"),
 					narrow: false,
 					autoplay: false,
 					showlrc: 2,
@@ -3419,12 +3419,12 @@ PAM方法于1987年提出用于l1范数和其他距离的工作。 k-medoid是�
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 网易云网页版关于&quot;陈芳语-爱你&quot;的歌曲id&#x3D;22852057</span><br><span class="line">http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3 #可直接播放外链</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg #封面图</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc #歌词 &#x2F;&#x2F;暂时无法添加lrc歌词，只能内嵌歌词</span><br></pre></td></tr></table></figure>
 <h2 id="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："><a href="#下方测试插件插入音乐（无歌词，lrc方式歌词失效）：" class="headerlink" title="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："></a>下方测试插件插入音乐（无歌词，lrc方式歌词失效）：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayer &quot;爱你&quot; &quot;陈芳语&quot; &quot;http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg&quot; &quot;lrc:https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc&quot; %&#125;</span><br></pre></td></tr></table></figure>
 
-        <div id="aplayer-QGGsvMVL" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+        <div id="aplayer-zZHzinMy" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-QGGsvMVL"),
+            element: document.getElementById("aplayer-zZHzinMy"),
             narrow: false,
             autoplay: false,
             showlrc: 3,
@@ -3441,12 +3441,12 @@ PAM方法于1987年提出用于l1范数和其他距离的工作。 k-medoid是�
         </script>
 
 <h2 id="下方测试插件插入内嵌音乐歌词："><a href="#下方测试插件插入内嵌音乐歌词：" class="headerlink" title="下方测试插件插入内嵌音乐歌词："></a>下方测试插件插入内嵌音乐歌词：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayerlrc &quot;爱你&quot; &quot;陈芳语&quot; &quot;http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.coding.net&#x2F;p&#x2F;eisenhao&#x2F;d&#x2F;eisenhao&#x2F;git&#x2F;raw&#x2F;master&#x2F;uploads&#x2F;loveYou.jpg&quot; %&#125;</span><br><span class="line">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</span><br><span class="line">&#123;% endaplayerlrc %&#125;</span><br></pre></td></tr></table></figure>
-<div id="aplayer-ROFCUIpT" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+<div id="aplayer-GWhqBlvm" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
 				<pre class="aplayer-lrc-content">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</pre>
 			</div>
 			<script>
 				var ap = new APlayer({
-					element: document.getElementById("aplayer-ROFCUIpT"),
+					element: document.getElementById("aplayer-GWhqBlvm"),
 					narrow: false,
 					autoplay: false,
 					showlrc: 2,
