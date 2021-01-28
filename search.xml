@@ -415,6 +415,48 @@
       </tags>
   </entry>
   <entry>
+    <title>Apriori算法--数据挖掘</title>
+    <url>/2018/12/10/DataMining_Apriori/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/DataMining_Apriori.png" class="full-image" />
+
+<h1 id="Apriori算法介绍"><a href="#Apriori算法介绍" class="headerlink" title="Apriori算法介绍"></a>Apriori算法介绍</h1><p>Apriori是一种在事务数据库上进行频繁项集挖掘和关联规则学习的算法。它通过识别数据库中的频繁单个项目并将它们扩展到越来越大的项目集来进行,只要这些项目集在数据库中经常出现。由Apriori确定的频繁项目集可用于确定关联规则,其突出显示数据库中的一般趋势:这在诸如市场购物栏分析的领域中具有应用。</p>
+<a id="more"></a>
+
+<p>Apriori算法由Agrawal和Srikant于1994年提出。Apriori旨在对包含交易的数据库(例如,客户购买的项目集合,或网站频繁或IP地址的详细信息)进行操作。其他算法设计用于在没有事务(Winepi和Minepi)或没有时间戳(DNA序列)的数据中查找关联规则。每个事务都被视为一组项(项集)。给出一个门槛 C,Apriori算法识别至少是子集的项集 C 数据库中的事务。Apriori使用“自下而上”方法,其中频繁的子集一次扩展一个项目(称为候选生成的步骤),并且针对数据测试候选组。当没有找到进一步成功的扩展时,算法终止。</p>
+<h1 id="Python编程实现Apriori算法"><a href="#Python编程实现Apriori算法" class="headerlink" title="Python编程实现Apriori算法"></a>Python编程实现Apriori算法</h1><h2 id="Apriori算法步骤"><a href="#Apriori算法步骤" class="headerlink" title="Apriori算法步骤"></a>Apriori算法步骤</h2><ul>
+<li>S1.令 k=1</li>
+<li>S2.扫描数据库,生成长度为k的候选项集的集合Ck</li>
+<li>S3.重复S4~S8直到找不到新的候选项集的集合Ck</li>
+<li>S4.从长度为k的频繁项集Lk生成长度为(k + 1)的候选项集</li>
+<li>S5.修剪长度为(k + 1)的候选项集中的出现频率低于(min_support阈值)的候选项目</li>
+<li>S6.通过扫描数据库,统计每个候选项的数目</li>
+<li>S7.删除出现频率低于(min_support阈值)的候选项,只留下频繁出现的候选项目集Lk</li>
+<li>S8. k = k + 1</li>
+</ul>
+<h2 id="生成长度为1的候选项集C1"><a href="#生成长度为1的候选项集C1" class="headerlink" title="生成长度为1的候选项集C1"></a>生成长度为1的候选项集C1</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># C1 是大小为1的所有候选项集的集合</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createC1</span>(<span class="params">dataSet</span>):</span></span><br><span class="line">    C1 = []</span><br><span class="line">    <span class="keyword">for</span> transaction <span class="keyword">in</span> dataSet:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> transaction:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> [item] <span class="keyword">in</span> C1:</span><br><span class="line">                C1.append([item]) <span class="comment">#store all the item unrepeatly</span></span><br><span class="line">    <span class="comment"># C1.sort()</span></span><br><span class="line">    <span class="comment">#return map(frozenset, C1)#frozen set, user can&#x27;t change it.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">frozenset</span>, C1))</span><br></pre></td></tr></table></figure>
+
+<h2 id="扫描数据库-返回频繁出现的候选项目集Lk-出现频率大于给定阈值minSupport"><a href="#扫描数据库-返回频繁出现的候选项目集Lk-出现频率大于给定阈值minSupport" class="headerlink" title="扫描数据库,返回频繁出现的候选项目集Lk(出现频率大于给定阈值minSupport)"></a>扫描数据库,返回频繁出现的候选项目集Lk(出现频率大于给定阈值minSupport)</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scanD</span>(<span class="params">D, Ck, minSupport</span>):</span></span><br><span class="line">    ssCnt=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> tid <span class="keyword">in</span> D:</span><br><span class="line">        <span class="keyword">for</span> can <span class="keyword">in</span> Ck:</span><br><span class="line">            <span class="keyword">if</span> can.issubset(tid):</span><br><span class="line">                <span class="comment">#if not ssCnt.has_key(can):</span></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> can <span class="keyword">in</span> ssCnt:</span><br><span class="line">                    ssCnt[can]=<span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>: ssCnt[can]+=<span class="number">1</span></span><br><span class="line">    numItems=<span class="built_in">float</span>(<span class="built_in">len</span>(D))</span><br><span class="line">    retList = []</span><br><span class="line">    supportData = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> ssCnt:</span><br><span class="line">        support = ssCnt[key]/numItems <span class="comment">#compute support</span></span><br><span class="line">        <span class="keyword">if</span> support &gt;= minSupport:</span><br><span class="line">            retList.insert(<span class="number">0</span>, key)</span><br><span class="line">        supportData[key] = support</span><br><span class="line">    <span class="keyword">return</span> retList, supportData</span><br></pre></td></tr></table></figure>
+
+<h2 id="apriori组合-向上合并L"><a href="#apriori组合-向上合并L" class="headerlink" title="apriori组合,向上合并L"></a>apriori组合,向上合并L</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aprioriGen</span>(<span class="params">Lk, k</span>):</span></span><br><span class="line">    <span class="comment">#creates Ck 参数：频繁项集列表 Lk 与项集元素个数 k</span></span><br><span class="line">    retList = []</span><br><span class="line">    lenLk = <span class="built_in">len</span>(Lk)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(lenLk):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>, lenLk): <span class="comment">#两两组合遍历</span></span><br><span class="line">            L1 = <span class="built_in">list</span>(Lk[i])[:k-<span class="number">2</span>]; L2 = <span class="built_in">list</span>(Lk[j])[:k-<span class="number">2</span>]</span><br><span class="line">            L1.sort(); L2.sort()</span><br><span class="line">            <span class="keyword">if</span> L1 == L2: <span class="comment">#若两个集合的前k-2个项相同时, 则将两个集合合并</span></span><br><span class="line">                retList.append(Lk[i] | Lk[j]) <span class="comment">#set union</span></span><br><span class="line">    <span class="keyword">return</span> retList</span><br></pre></td></tr></table></figure>
+
+<h2 id="apriori算法核心函数"><a href="#apriori算法核心函数" class="headerlink" title="apriori算法核心函数"></a>apriori算法核心函数</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">apriori</span>(<span class="params">dataSet, minSupport = <span class="number">0.5</span></span>):</span></span><br><span class="line">    C1 = createC1(dataSet)</span><br><span class="line">    D = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">set</span>, dataSet)) <span class="comment">#python3</span></span><br><span class="line">    L1, supportData = scanD(D, C1, minSupport)<span class="comment">#单项最小支持度判断 0.5，生成L1</span></span><br><span class="line">    L = [L1]</span><br><span class="line">    k = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">len</span>(L[k-<span class="number">2</span>]) &gt; <span class="number">0</span>):<span class="comment">#创建包含更大项集的更大列表, 直到下一个大的项集为空</span></span><br><span class="line">        Ck = aprioriGen(L[k-<span class="number">2</span>], k)<span class="comment">#Ck</span></span><br><span class="line">        Lk, supK = scanD(D, Ck, minSupport)<span class="comment">#get Lk</span></span><br><span class="line">        supportData.update(supK)</span><br><span class="line">        L.append(Lk)</span><br><span class="line">        k += <span class="number">1</span> <span class="comment">#继续向上合并 生成项集个数更多的</span></span><br><span class="line">    <span class="keyword">return</span> L, supportData</span><br></pre></td></tr></table></figure>
+
+<h2 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># main函数</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment">#加载数据集</span></span><br><span class="line">    dataSet = loadDataSet()</span><br><span class="line">    <span class="comment">#挖掘频繁项集</span></span><br><span class="line">    L, supportData = apriori(dataSet, <span class="number">0.5</span>)</span><br><span class="line">    print(<span class="string">&#x27;L = &#x27;</span>, L)</span><br><span class="line">    print(<span class="string">&#x27;supportData = &#x27;</span>, supportData)</span><br></pre></td></tr></table></figure>
+
+<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">L = [[<span class="built_in">frozenset</span>(&#123;<span class="number">5</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">3</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>&#125;)], [<span class="built_in">frozenset</span>(&#123;<span class="number">2</span>,</span><br><span class="line"><span class="number">5</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">3</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">3</span>&#125;)], []]</span><br><span class="line">supportData = &#123;<span class="built_in">frozenset</span>(&#123;<span class="number">1</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">3</span>&#125;): <span class="number">0.75</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">4</span>&#125;): <span class="number">0.25</span>,</span><br><span class="line"><span class="built_in">frozenset</span>(&#123;<span class="number">2</span>&#125;): <span class="number">0.75</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">5</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">3</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">3</span>&#125;):</span><br><span class="line"><span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">5</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">3</span>, <span class="number">5</span>&#125;): <span class="number">0.25</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">5</span>&#125;): <span class="number">0.25</span>,</span><br><span class="line"><span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">2</span>&#125;): <span class="number">0.25</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;): <span class="number">0.25</span>&#125;</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>对于数据集[[1, 3, 4], [2, 3], [1, 2, 3, 5], [2, 5]],运行apriori挖掘(出现频率大于阈值0.5)的频繁项集合为:[5], [2],<br>[3], [1], [2,5], [2,3], [1,3],其中[2,5], [2,3], [1,3]在数据库中出现的频率均为0.5</p>
+<div class="note success"><p><strong>备注</strong><br><strong>运行平台</strong>：Arch Linux<br><strong>运行环境</strong>：Intellij IDEA<br><strong>源代码</strong>：<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/Apriori.py">Apriori.py</a></p>
+</div>
+]]></content>
+      <categories>
+        <category>算法</category>
+      </categories>
+      <tags>
+        <tag>数据挖掘</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>DBSCAN算法--数据挖掘</title>
     <url>/2018/11/10/DataMining_DBSCAN/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/DataMining_DBSCAN.png" class="full-image" />
@@ -462,48 +504,6 @@
 <h3 id="smile-mat文件的DBSCAN算法聚类效果"><a href="#smile-mat文件的DBSCAN算法聚类效果" class="headerlink" title="smile.mat文件的DBSCAN算法聚类效果"></a>smile.mat文件的DBSCAN算法聚类效果</h3><p>当设置Eps=0.08, MinPts=10时，数据分类数Cluster=3，效果较理想，如下图所示<br><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/DataMining_DBSCAN_smileEps=0.08MinPts=10ResultCluster=3.png" alt="Eps=0.08,MinPts=10的效果图"></p>
 <h3 id="spiral-mat文件的DBSCAN算法聚类效果"><a href="#spiral-mat文件的DBSCAN算法聚类效果" class="headerlink" title="spiral.mat文件的DBSCAN算法聚类效果"></a>spiral.mat文件的DBSCAN算法聚类效果</h3><p>当设置Eps=1, MinPts=8时，数据分类数Cluster=2，效果较理想，如下图所示<br><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/DataMining_DBSCAN_spiralEps=1MinPts=8ResultCluster=2.png" alt="Eps=1,MinPts=8的效果图"></p>
 <div class="note success"><p><strong>备注</strong><br><strong>运行平台</strong>：Arch Linux<br><strong>运行环境</strong>：Intellij IDEA<br><strong>待聚类数据集文件</strong>：<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/long.mat">long.mat</a>、<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/moon.mat">moon.mat</a>、<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/sizes5.mat">sizes5.mat</a>、<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/smile.mat">smile.mat</a>、<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/spiral.mat">spiral.mat</a><br><strong>源代码</strong>：<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/DensityBasedClustering.py">DensityBasedClustering.py</a></p>
-</div>
-]]></content>
-      <categories>
-        <category>算法</category>
-      </categories>
-      <tags>
-        <tag>数据挖掘</tag>
-        <tag>算法</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Apriori算法--数据挖掘</title>
-    <url>/2018/12/10/DataMining_Apriori/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/DataMining_Apriori.png" class="full-image" />
-
-<h1 id="Apriori算法介绍"><a href="#Apriori算法介绍" class="headerlink" title="Apriori算法介绍"></a>Apriori算法介绍</h1><p>Apriori是一种在事务数据库上进行频繁项集挖掘和关联规则学习的算法。它通过识别数据库中的频繁单个项目并将它们扩展到越来越大的项目集来进行,只要这些项目集在数据库中经常出现。由Apriori确定的频繁项目集可用于确定关联规则,其突出显示数据库中的一般趋势:这在诸如市场购物栏分析的领域中具有应用。</p>
-<a id="more"></a>
-
-<p>Apriori算法由Agrawal和Srikant于1994年提出。Apriori旨在对包含交易的数据库(例如,客户购买的项目集合,或网站频繁或IP地址的详细信息)进行操作。其他算法设计用于在没有事务(Winepi和Minepi)或没有时间戳(DNA序列)的数据中查找关联规则。每个事务都被视为一组项(项集)。给出一个门槛 C,Apriori算法识别至少是子集的项集 C 数据库中的事务。Apriori使用“自下而上”方法,其中频繁的子集一次扩展一个项目(称为候选生成的步骤),并且针对数据测试候选组。当没有找到进一步成功的扩展时,算法终止。</p>
-<h1 id="Python编程实现Apriori算法"><a href="#Python编程实现Apriori算法" class="headerlink" title="Python编程实现Apriori算法"></a>Python编程实现Apriori算法</h1><h2 id="Apriori算法步骤"><a href="#Apriori算法步骤" class="headerlink" title="Apriori算法步骤"></a>Apriori算法步骤</h2><ul>
-<li>S1.令 k=1</li>
-<li>S2.扫描数据库,生成长度为k的候选项集的集合Ck</li>
-<li>S3.重复S4~S8直到找不到新的候选项集的集合Ck</li>
-<li>S4.从长度为k的频繁项集Lk生成长度为(k + 1)的候选项集</li>
-<li>S5.修剪长度为(k + 1)的候选项集中的出现频率低于(min_support阈值)的候选项目</li>
-<li>S6.通过扫描数据库,统计每个候选项的数目</li>
-<li>S7.删除出现频率低于(min_support阈值)的候选项,只留下频繁出现的候选项目集Lk</li>
-<li>S8. k = k + 1</li>
-</ul>
-<h2 id="生成长度为1的候选项集C1"><a href="#生成长度为1的候选项集C1" class="headerlink" title="生成长度为1的候选项集C1"></a>生成长度为1的候选项集C1</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># C1 是大小为1的所有候选项集的集合</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">createC1</span>(<span class="params">dataSet</span>):</span></span><br><span class="line">    C1 = []</span><br><span class="line">    <span class="keyword">for</span> transaction <span class="keyword">in</span> dataSet:</span><br><span class="line">        <span class="keyword">for</span> item <span class="keyword">in</span> transaction:</span><br><span class="line">            <span class="keyword">if</span> <span class="keyword">not</span> [item] <span class="keyword">in</span> C1:</span><br><span class="line">                C1.append([item]) <span class="comment">#store all the item unrepeatly</span></span><br><span class="line">    <span class="comment"># C1.sort()</span></span><br><span class="line">    <span class="comment">#return map(frozenset, C1)#frozen set, user can&#x27;t change it.</span></span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">frozenset</span>, C1))</span><br></pre></td></tr></table></figure>
-
-<h2 id="扫描数据库-返回频繁出现的候选项目集Lk-出现频率大于给定阈值minSupport"><a href="#扫描数据库-返回频繁出现的候选项目集Lk-出现频率大于给定阈值minSupport" class="headerlink" title="扫描数据库,返回频繁出现的候选项目集Lk(出现频率大于给定阈值minSupport)"></a>扫描数据库,返回频繁出现的候选项目集Lk(出现频率大于给定阈值minSupport)</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">scanD</span>(<span class="params">D, Ck, minSupport</span>):</span></span><br><span class="line">    ssCnt=&#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> tid <span class="keyword">in</span> D:</span><br><span class="line">        <span class="keyword">for</span> can <span class="keyword">in</span> Ck:</span><br><span class="line">            <span class="keyword">if</span> can.issubset(tid):</span><br><span class="line">                <span class="comment">#if not ssCnt.has_key(can):</span></span><br><span class="line">                <span class="keyword">if</span> <span class="keyword">not</span> can <span class="keyword">in</span> ssCnt:</span><br><span class="line">                    ssCnt[can]=<span class="number">1</span></span><br><span class="line">                <span class="keyword">else</span>: ssCnt[can]+=<span class="number">1</span></span><br><span class="line">    numItems=<span class="built_in">float</span>(<span class="built_in">len</span>(D))</span><br><span class="line">    retList = []</span><br><span class="line">    supportData = &#123;&#125;</span><br><span class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> ssCnt:</span><br><span class="line">        support = ssCnt[key]/numItems <span class="comment">#compute support</span></span><br><span class="line">        <span class="keyword">if</span> support &gt;= minSupport:</span><br><span class="line">            retList.insert(<span class="number">0</span>, key)</span><br><span class="line">        supportData[key] = support</span><br><span class="line">    <span class="keyword">return</span> retList, supportData</span><br></pre></td></tr></table></figure>
-
-<h2 id="apriori组合-向上合并L"><a href="#apriori组合-向上合并L" class="headerlink" title="apriori组合,向上合并L"></a>apriori组合,向上合并L</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">aprioriGen</span>(<span class="params">Lk, k</span>):</span></span><br><span class="line">    <span class="comment">#creates Ck 参数：频繁项集列表 Lk 与项集元素个数 k</span></span><br><span class="line">    retList = []</span><br><span class="line">    lenLk = <span class="built_in">len</span>(Lk)</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(lenLk):</span><br><span class="line">        <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(i+<span class="number">1</span>, lenLk): <span class="comment">#两两组合遍历</span></span><br><span class="line">            L1 = <span class="built_in">list</span>(Lk[i])[:k-<span class="number">2</span>]; L2 = <span class="built_in">list</span>(Lk[j])[:k-<span class="number">2</span>]</span><br><span class="line">            L1.sort(); L2.sort()</span><br><span class="line">            <span class="keyword">if</span> L1 == L2: <span class="comment">#若两个集合的前k-2个项相同时, 则将两个集合合并</span></span><br><span class="line">                retList.append(Lk[i] | Lk[j]) <span class="comment">#set union</span></span><br><span class="line">    <span class="keyword">return</span> retList</span><br></pre></td></tr></table></figure>
-
-<h2 id="apriori算法核心函数"><a href="#apriori算法核心函数" class="headerlink" title="apriori算法核心函数"></a>apriori算法核心函数</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">apriori</span>(<span class="params">dataSet, minSupport = <span class="number">0.5</span></span>):</span></span><br><span class="line">    C1 = createC1(dataSet)</span><br><span class="line">    D = <span class="built_in">list</span>(<span class="built_in">map</span>(<span class="built_in">set</span>, dataSet)) <span class="comment">#python3</span></span><br><span class="line">    L1, supportData = scanD(D, C1, minSupport)<span class="comment">#单项最小支持度判断 0.5，生成L1</span></span><br><span class="line">    L = [L1]</span><br><span class="line">    k = <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">len</span>(L[k-<span class="number">2</span>]) &gt; <span class="number">0</span>):<span class="comment">#创建包含更大项集的更大列表, 直到下一个大的项集为空</span></span><br><span class="line">        Ck = aprioriGen(L[k-<span class="number">2</span>], k)<span class="comment">#Ck</span></span><br><span class="line">        Lk, supK = scanD(D, Ck, minSupport)<span class="comment">#get Lk</span></span><br><span class="line">        supportData.update(supK)</span><br><span class="line">        L.append(Lk)</span><br><span class="line">        k += <span class="number">1</span> <span class="comment">#继续向上合并 生成项集个数更多的</span></span><br><span class="line">    <span class="keyword">return</span> L, supportData</span><br></pre></td></tr></table></figure>
-
-<h2 id="主函数"><a href="#主函数" class="headerlink" title="主函数"></a>主函数</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># main函数</span></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">&quot;__main__&quot;</span>:</span><br><span class="line">    <span class="comment">#加载数据集</span></span><br><span class="line">    dataSet = loadDataSet()</span><br><span class="line">    <span class="comment">#挖掘频繁项集</span></span><br><span class="line">    L, supportData = apriori(dataSet, <span class="number">0.5</span>)</span><br><span class="line">    print(<span class="string">&#x27;L = &#x27;</span>, L)</span><br><span class="line">    print(<span class="string">&#x27;supportData = &#x27;</span>, supportData)</span><br></pre></td></tr></table></figure>
-
-<h2 id="运行结果"><a href="#运行结果" class="headerlink" title="运行结果"></a>运行结果</h2><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">L = [[<span class="built_in">frozenset</span>(&#123;<span class="number">5</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">3</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>&#125;)], [<span class="built_in">frozenset</span>(&#123;<span class="number">2</span>,</span><br><span class="line"><span class="number">5</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">3</span>&#125;), <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">3</span>&#125;)], []]</span><br><span class="line">supportData = &#123;<span class="built_in">frozenset</span>(&#123;<span class="number">1</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">3</span>&#125;): <span class="number">0.75</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">4</span>&#125;): <span class="number">0.25</span>,</span><br><span class="line"><span class="built_in">frozenset</span>(&#123;<span class="number">2</span>&#125;): <span class="number">0.75</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">5</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">3</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">3</span>&#125;):</span><br><span class="line"><span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">5</span>&#125;): <span class="number">0.5</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">3</span>, <span class="number">5</span>&#125;): <span class="number">0.25</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">5</span>&#125;): <span class="number">0.25</span>,</span><br><span class="line"><span class="built_in">frozenset</span>(&#123;<span class="number">1</span>, <span class="number">2</span>&#125;): <span class="number">0.25</span>, <span class="built_in">frozenset</span>(&#123;<span class="number">2</span>, <span class="number">3</span>, <span class="number">5</span>&#125;): <span class="number">0.25</span>&#125;</span><br><span class="line"></span><br><span class="line">Process finished <span class="keyword">with</span> exit code <span class="number">0</span></span><br></pre></td></tr></table></figure>
-<p>对于数据集[[1, 3, 4], [2, 3], [1, 2, 3, 5], [2, 5]],运行apriori挖掘(出现频率大于阈值0.5)的频繁项集合为:[5], [2],<br>[3], [1], [2,5], [2,3], [1,3],其中[2,5], [2,3], [1,3]在数据库中出现的频率均为0.5</p>
-<div class="note success"><p><strong>备注</strong><br><strong>运行平台</strong>：Arch Linux<br><strong>运行环境</strong>：Intellij IDEA<br><strong>源代码</strong>：<a href="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/Apriori.py">Apriori.py</a></p>
 </div>
 ]]></content>
       <categories>
@@ -1674,7 +1674,7 @@
 </ol>
 <h3 id="发布"><a href="#发布" class="headerlink" title="发布"></a>发布</h3><ol>
 <li>测试没问题后，我们就生成静态网页文件发布至我们的Github pages 中。<figure class="highlight c"><figcaption><span>命令执行目录：~/你的博客站点根目录</span></figcaption><table><tr><td class="code"><pre><span class="line">$ cd /home/eisenhao/eisenhao.github.io</span><br><span class="line">$ hexo clean &amp;&amp; hexo g &amp;&amp; hexo d</span><br></pre></td></tr></table></figure></li>
-<li>可能会要求输入github账号密码：<a href="mailto:&#101;&#x69;&#x31;&#x33;&#x39;&#49;&#49;&#52;&#54;&#x38;&#x33;&#x37;&#x30;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;">&#101;&#x69;&#x31;&#x33;&#x39;&#49;&#49;&#52;&#54;&#x38;&#x33;&#x37;&#x30;&#64;&#103;&#x6d;&#x61;&#x69;&#x6c;&#46;&#99;&#x6f;&#109;</a></li>
+<li>可能会要求输入github账号密码：<a href="mailto:&#101;&#x69;&#x31;&#x33;&#57;&#x31;&#49;&#x34;&#54;&#x38;&#x33;&#55;&#x30;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#101;&#x69;&#x31;&#x33;&#57;&#x31;&#49;&#x34;&#54;&#x38;&#x33;&#55;&#x30;&#x40;&#x67;&#109;&#97;&#x69;&#x6c;&#x2e;&#x63;&#x6f;&#109;</a></li>
 <li>如果上传失败显示如下信息,可能是由于我们没有配置root环境中的GitHub账号global<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">*** 请告诉我你是谁。</span><br><span class="line"></span><br><span class="line">运行</span><br><span class="line"></span><br><span class="line">  git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">  git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br><span class="line">来设置您账号的缺省身份标识。</span><br><span class="line">如果仅在本仓库设置身份标识，则省略 --global 参数。</span><br><span class="line"></span><br><span class="line">fatal: 无法自动探测邮件地址（得到 &#39;root@g510.(none)&#39;）</span><br><span class="line">Username for &#39;https:&#x2F;&#x2F;github.com&#39;: ei13911468370@gmail.com</span><br><span class="line">Password for &#39;https:&#x2F;&#x2F;ei13911468370@gmail.com@github.com&#39;: </span><br><span class="line">Everything up-to-date</span><br><span class="line">分支 &#39;master&#39; 设置为跟踪来自 &#39;https:&#x2F;&#x2F;github.com&#x2F;EisenHao&#x2F;eisenhao.github.io.git&#39; 的远程分支 &#39;master&#39;。</span><br><span class="line">INFO  Deploy done: git</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
 <li>按照提示配置一下GitHub的global账号即可.<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">$ git config --global user.email &quot;you@example.com&quot;</span><br><span class="line">$ git config --global user.name &quot;Your Name&quot;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 
@@ -1698,23 +1698,73 @@
       </tags>
   </entry>
   <entry>
+    <title>MBA关注：什么是真正的富人思维？（深度好文）</title>
+    <url>/2017/01/07/rich-thinking-by-mba/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/rich-thinking-by-mba.jpg" class="full-image" />
+
+<div class="note success"><p>摘自MBA中国网：<br><a href="http://www.mbachina.com/html/zhaopin/201701/101719.html">http://www.mbachina.com/html/zhaopin/201701/101719.html</a></p>
+</div>
+
+<h2 id="你渴望成为的那种有钱人，不是靠技能获取一份高工资的人"><a href="#你渴望成为的那种有钱人，不是靠技能获取一份高工资的人" class="headerlink" title="你渴望成为的那种有钱人，不是靠技能获取一份高工资的人"></a>你渴望成为的那种有钱人，不是靠技能获取一份高工资的人</h2><p>严格来说，即使在中国，凭借高超的技术领取高薪，最终取得财务自由也不是不可能的，只是难度极大，而且异常辛苦。没有过人的先天的条件和顶级的后天培养，大多数人所能习得的技能，都不是不可替代到让老板心甘情愿为你付一份远远超过市场平均水平的薪水的。只要你对中国绝大多数企业的收入获得方式稍加理解，就能明白技术骨干的收入是很难超过掌握客户的销售总监和组建团队和客户对接的项目主管的。</p>
+<a id="more"></a>
+
+<p>美国的一个著名的喜剧明星Chris Rock在一场脱口秀中讲过一个段子：黑人在美国最多也就rich，但不可能wealthy。奥尼尔年薪两千万美金，那只能叫rich;在奥尼尔工资支票上签字的那些白人老头们，才能算wealthy。事实上，我们身边最常见的有钱人都是后者，他们不是技能过人的人，而是整合资源的人，简称老板，也是这篇文章想探讨的重点。</p>
+<p>值得一提的是，在现代的商业环境下，并非传统企业那种100%的公司拥有者才叫老板。项目投资人，企业的合伙人，装修队的工头，夜总会的妈咪，安排一队小弟在三里屯收二手iPhone自己坐在旁边抽烟的人… 但凡直接发起并促成商业活动的人，在我看来都是老板。</p>
+<p>你真正渴望成为的那种有钱人，不是超凡技能的人，而是寻找资源并整合资源的人。这就是学校和父母从来不曾告诉你的秘密，当然了他们之所以不告诉你，很可能是因为自己也没这么想过。</p>
+<h2 id="自我保护心理注定了穷人的宿命"><a href="#自我保护心理注定了穷人的宿命" class="headerlink" title="自我保护心理注定了穷人的宿命"></a>自我保护心理注定了穷人的宿命</h2><p>不信?可以看看你身边多少人热衷于分享 “盖茨的的书不会告诉你他母亲是IBM董事”，“还原聚美优品陈欧履历造假真相”，百度知道甚至有好几个问题都在研究“马化腾究竟是是不是富二代”。</p>
+<p>我们的内心深处有一种与生俱来的强烈的自我保护机制，它会不停地暗示你，只有自己的想法和选择才是最好的最合理的。但凡当大脑扫描到有什么人和事会令自己的显得是如此的无知而无能的信息，这种保护机制就会迅速启动，收集一切线索去证明他们都是因为一些<em>客观因素而侥幸成功</em>，自己要是有同样的客观条件，只会比他们更好。</p>
+<p>在<a href="http://wiki.mbalib.com/wiki/%E9%A6%96%E9%A1%B5">MBA智库百科</a>中，自我保护是指个体维护心理平衡的一种自发性行为，即是通过压抑、补偿、文饰和升华的手段改变对心理紧张的主观感受，掩饰不能接受的内在冲动和虚拟现实环境的危险，用以<em>减少痛苦</em>以及对痛苦的<em>意识</em>，达到心理平衡的行为反应。<small>(自欺欺人)</small></p>
+<p>而且，万一这些成功人士是自己身边非常熟悉的人，内心的保护机制会更加强大。就像上学的时候，我们热衷于讨论学习好的人都是书呆子没出息，漂亮姑娘只喜欢开跑车的渣男一样;长大之后则变成了，同事升职了是因为会拍领导马屁，同学创业成功了因为家里给了巨额的启动资金。穷人的头脑(<em>穷人思维</em>)是如此的敏捷，如果上述原因都找不到，还有最后一招杀手锏。</p>
+<p>是的，正是这种与生俱来的自我保护心理，维护了社会稳定，减少了自杀率，也让<small>极少</small>的一部分克服了这种心理的人，成为了有钱人。</p>
+<blockquote>
+<p>总结下来就是，穷人相信人和人之间的差距是<em>客观条件所决定的</em>，而富人相信这种差距的决定性因素是主观能动性。</p>
+</blockquote>
+<p><em>穷人的思维习惯</em>是：<em>他们做到了，是因为他们富二代/有关系/运气好，我没有这些，所以我做不到</em>（<em>将一切原因归咎于客观条件，掩饰自生的问题）。如果我有这些条件，我也可以做到</em>。富人的思维习惯是：他们做到了，我为什么没做到，我怎么才能做到?（正视自身薄弱点，充分发挥主观能动性，并积极地通过理性分析和寻找各种方式弥补差距）</p>
+<p>可怜的穷人们，不打破这种自我保护的心里，是很难摆脱一事无成的宿命的。可惜，他们中的大多数一生都<del><em>沉浸在自我安慰中，从怀才不遇到壮志未酬，最终感慨平平淡淡才是真。</em></del></p>
+<h2 id="有钱人的思维是整合资源，而不是拥有现成的资源"><a href="#有钱人的思维是整合资源，而不是拥有现成的资源" class="headerlink" title="有钱人的思维是整合资源，而不是拥有现成的资源"></a>有钱人的思维是整合资源，而不是拥有现成的资源</h2><p>如果这篇文章你只能看一段，那就是这一段，没准它就能改变个别人的人生轨迹。</p>
+<p>其实很多穷人也不是甘心于一辈子领薪水的啊，他们只是在等机会，他们<small>永远在等机会</small>。</p>
+<p>“我在美国留学的时候，惊人地发现原来每个留学生和他们的父母心里其实也都有一条走上人生巅峰的道路嘛。本科认真学习，积极参加课外活动，拓展社交网络，最终成绩优异简历丰富，找到一个大公司工作几年积累工作经验，继续名校MBA深造，出任跨国公司高级管理人员，最终调回国内担任中国区经理，甚至<del>时机成熟了</del>，凭借多年工作积累的经验和人脉，跳出来单飞最终创业成功。”</p>
+<p>听起来如此酣畅淋漓的人生攻略，其实是最经典的穷人思维，穷人总以为有钱人的每一步都是<em>按部就班顺水推舟得来的，所以要等着一切时机都成熟了，一切资源都获取了，才能开始行动</em>。</p>
+<p>他们无法理解的是，世界上还有另外一小撮人，和他们拥有类似的客观条件，但却把他们觉得遥不可及的事情做起来了。这一小撮人，没有本金，找朋友借钱找投资人投资甚至找银行贷款；没有技术，自己去现学或者找到懂技术的人帮自己来做；没有关系，找人介绍请人吃饭送礼屡败屡战；没有客户，一个一个冷拨电话登门拜访甚至办公室门口堵着。上面这种人，就是传说中的老板。（正视自身薄弱点，充分发挥主观能动性，并积极地通过理性分析和寻找各种方式弥补差距 。整合资源，而不是拥有现成的资源）</p>
+<p>按照穷人的万事俱备才能行动的思维，聚美优品的创业过程应该是这样：</p>
+<p>陈欧同学大学时期学习的是快消品营销，斯坦福MBA毕业后进入丝芙兰美国总部担任销售高管，工作五年之后跳槽到天猫国际任化妆品频道总监，在天猫又干了几年之后，掌握了大量供货商资源，打造了一个优秀的电商运营团队，在化妆品行业侵染了20多年后，终于在2026年成立了聚美优品。然后…</p>
+<p>聚美优品的实际创业过程这里就不细表了，微博上已经写的太多了，可无论陈老板的之前经历作假也好，波士堂上装逼也罢，还是他家里多有钱真格基金给他提供了多少关系，他又如何运气好赶上了垂直化电商爆发的前夜，仅仅是他决定去做化妆品电商这一件事，勇气和魄力就远远超越了多少客观条件跟他相仿甚至更好的人。</p>
+<p>其实，当你真正开始做一个整合资源的老板的时候就会发现，你之前自以为拥有的资源和人脉远没有你想的那么好用，任何一个商业活动从无到有，都必然要经历那些团队不整没有客户的阶段，滴滴打车两年前还在在北京机场T3一个一个拽着出租车司机下载App;以雷军在互联网圈二十多年的人脉，创立小米的时候光一个个登门挖人就挖了近一年，相比之下，你觉得自己能有的那些资源又能有多管用呢?切记，老板的实质是寻找资源然后整合资源的人，并不是拥有现成资源的人。</p>
+<p>更进一步说，一切商业机会都包含了大量的未知因素，而鉴于人类对于一个未知事物的群体接受度的判断力是极其有限的，一个优秀的老板擅长的是边做根据形势快速调整自己的商业活动，而不是事先把一切事情都预料好了。你能想象亚马逊的创始人当年在网上卖书的时候，已经计划好了公司的业务要包括电子阅读器，电商，流媒体，云计算，无人机吗?</p>
+<p>为什么穷人等待的机会永远不会到来?等你把一切都看的清清楚楚的时候，市场早已经被那些趁着一切并不明朗就冲进去的人瓜分干净了。真正的好机会，永远都存在与未知中。同样的道理并非只存在于商业世界，每个人生活中最好的机会，几乎都出现在那些你没有完全准备好的时候。</p>
+<p>还记得刚去美国的时候，我听说高中的数学课代表去新东方做了托福老师，班里的同学谈起这件事，语气中大多充满了怀疑和嘲讽，因为大家都清楚他高中的时候学习好是因为数理化成绩优异，英语水平根本不行。他们想的一点没错，后来我才得知，这哥们当时连托福都没考过，但就是一咬牙硬着头皮上去应聘还成功了，结果最初过得心惊胆战，做梦都怕被学生从讲台上赶下来，于是每天疯狂的做题备课恶补英语，好不容易坚持了下来。</p>
+<p>而两年之后，嘲讽他的人还是当年的样子，他已经成了新东方的托福名师，公开课出现在新东方官网上，学生遍布北美。后来我默默地在家里看了他的讲课视频，比起我当年崇拜的那些新东方名师毫不逊色。我忽然想起了罗永浩当年写给俞敏洪的求职信，试想如果罗老师当年认为要把英语练到王强老师一样才能敢去新东方应聘，现在可能也只是一个吉林延边的文艺老愤青罢。</p>
+<p>你看，真正把事情做起来的人，考虑的问题的过程其实是这样的，这件事我一定要做，缺什么东西我去想办法去争取。而什么做不起来的人，永远在等待时机成熟。</p>
+<p>只有在实践中摔打过才知道，牛逼的商业理论可以让企业从1发展到10000，可以让创业者在经营的路上少走很多弯路，可以帮其他成型的企业的做商业咨询分析，但是对于一个渴望无中生有开展一段成功的商业活动的人而言，寻找资源并整合资源的能力才是从0到1的根本，它和任何具体的知识都没有关系，而是源于突破舒适区的决心，不屈不挠解决问题的耐心，愿赌服输的魄力。简而言之，它是一股不安于现状，相信主观能动性可以超越客观条件的，比性欲还强烈的内心驱动力。</p>
+<p>无论是工作还是生活，成功的人必然是有勇有谋，但勇又大于谋。相比之下，勤奋专注聪明简直只能算雕虫小技，唯有勇气才是一个人出类拔萃的核心竞争力。</p>
+<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>如果你的抽象思维能力实在有限，必须得看十分具体的例子去理解究竟什么才是寻找资源并整合资源，强烈推荐你上网看两个故事，一个是星巴克老板舒尔茨当年在西雅图开第一家咖啡店的始末，另一个是杨洁导演拍摄86版西游记的过程。</p>
+<p>以上，就是我在读了这么多年书，看了那么多案例，和自己在残酷的实践中，能给出的关于“不是富二代，不是官二代，很想成功，是不是就会成功了”的最好答案。至于你觉得它是醍醐灌顶还是勾兑鸡汤，看你的了。</p>
+]]></content>
+      <categories>
+        <category>心灵成长</category>
+      </categories>
+      <tags>
+        <tag>富人思维</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>恋爱观</title>
     <url>/2018/04/24/talkAboutLoveCiteByAnonymousSenior/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/talkAboutLoveCiteByAnonymousSenior.jpg" class="full-image" />
 
-<div id="aplayer-vEBmGKfv" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+<div id="aplayer-HqOOyUPK" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
 				<pre class="aplayer-lrc-content">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</pre>
 			</div>
 			<script>
 				var ap = new APlayer({
-					element: document.getElementById("aplayer-vEBmGKfv"),
+					element: document.getElementById("aplayer-HqOOyUPK"),
 					narrow: false,
 					autoplay: false,
 					showlrc: 2,
 					music: {
 						title: "爱你",
 						author: "陈芳语",
-						url: "http://music.163.com/song/media/outer/url?id=22852057.mp3",
+						url: "https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/22852057.mp3",
 						pic: "https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/loveYou.jpg",
 					}
 				});
@@ -1809,56 +1859,6 @@
       </categories>
       <tags>
         <tag>爱情</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>MBA关注：什么是真正的富人思维？（深度好文）</title>
-    <url>/2017/01/07/rich-thinking-by-mba/</url>
-    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/rich-thinking-by-mba.jpg" class="full-image" />
-
-<div class="note success"><p>摘自MBA中国网：<br><a href="http://www.mbachina.com/html/zhaopin/201701/101719.html">http://www.mbachina.com/html/zhaopin/201701/101719.html</a></p>
-</div>
-
-<h2 id="你渴望成为的那种有钱人，不是靠技能获取一份高工资的人"><a href="#你渴望成为的那种有钱人，不是靠技能获取一份高工资的人" class="headerlink" title="你渴望成为的那种有钱人，不是靠技能获取一份高工资的人"></a>你渴望成为的那种有钱人，不是靠技能获取一份高工资的人</h2><p>严格来说，即使在中国，凭借高超的技术领取高薪，最终取得财务自由也不是不可能的，只是难度极大，而且异常辛苦。没有过人的先天的条件和顶级的后天培养，大多数人所能习得的技能，都不是不可替代到让老板心甘情愿为你付一份远远超过市场平均水平的薪水的。只要你对中国绝大多数企业的收入获得方式稍加理解，就能明白技术骨干的收入是很难超过掌握客户的销售总监和组建团队和客户对接的项目主管的。</p>
-<a id="more"></a>
-
-<p>美国的一个著名的喜剧明星Chris Rock在一场脱口秀中讲过一个段子：黑人在美国最多也就rich，但不可能wealthy。奥尼尔年薪两千万美金，那只能叫rich;在奥尼尔工资支票上签字的那些白人老头们，才能算wealthy。事实上，我们身边最常见的有钱人都是后者，他们不是技能过人的人，而是整合资源的人，简称老板，也是这篇文章想探讨的重点。</p>
-<p>值得一提的是，在现代的商业环境下，并非传统企业那种100%的公司拥有者才叫老板。项目投资人，企业的合伙人，装修队的工头，夜总会的妈咪，安排一队小弟在三里屯收二手iPhone自己坐在旁边抽烟的人… 但凡直接发起并促成商业活动的人，在我看来都是老板。</p>
-<p>你真正渴望成为的那种有钱人，不是超凡技能的人，而是寻找资源并整合资源的人。这就是学校和父母从来不曾告诉你的秘密，当然了他们之所以不告诉你，很可能是因为自己也没这么想过。</p>
-<h2 id="自我保护心理注定了穷人的宿命"><a href="#自我保护心理注定了穷人的宿命" class="headerlink" title="自我保护心理注定了穷人的宿命"></a>自我保护心理注定了穷人的宿命</h2><p>不信?可以看看你身边多少人热衷于分享 “盖茨的的书不会告诉你他母亲是IBM董事”，“还原聚美优品陈欧履历造假真相”，百度知道甚至有好几个问题都在研究“马化腾究竟是是不是富二代”。</p>
-<p>我们的内心深处有一种与生俱来的强烈的自我保护机制，它会不停地暗示你，只有自己的想法和选择才是最好的最合理的。但凡当大脑扫描到有什么人和事会令自己的显得是如此的无知而无能的信息，这种保护机制就会迅速启动，收集一切线索去证明他们都是因为一些<em>客观因素而侥幸成功</em>，自己要是有同样的客观条件，只会比他们更好。</p>
-<p>在<a href="http://wiki.mbalib.com/wiki/%E9%A6%96%E9%A1%B5">MBA智库百科</a>中，自我保护是指个体维护心理平衡的一种自发性行为，即是通过压抑、补偿、文饰和升华的手段改变对心理紧张的主观感受，掩饰不能接受的内在冲动和虚拟现实环境的危险，用以<em>减少痛苦</em>以及对痛苦的<em>意识</em>，达到心理平衡的行为反应。<small>(自欺欺人)</small></p>
-<p>而且，万一这些成功人士是自己身边非常熟悉的人，内心的保护机制会更加强大。就像上学的时候，我们热衷于讨论学习好的人都是书呆子没出息，漂亮姑娘只喜欢开跑车的渣男一样;长大之后则变成了，同事升职了是因为会拍领导马屁，同学创业成功了因为家里给了巨额的启动资金。穷人的头脑(<em>穷人思维</em>)是如此的敏捷，如果上述原因都找不到，还有最后一招杀手锏。</p>
-<p>是的，正是这种与生俱来的自我保护心理，维护了社会稳定，减少了自杀率，也让<small>极少</small>的一部分克服了这种心理的人，成为了有钱人。</p>
-<blockquote>
-<p>总结下来就是，穷人相信人和人之间的差距是<em>客观条件所决定的</em>，而富人相信这种差距的决定性因素是主观能动性。</p>
-</blockquote>
-<p><em>穷人的思维习惯</em>是：<em>他们做到了，是因为他们富二代/有关系/运气好，我没有这些，所以我做不到</em>（<em>将一切原因归咎于客观条件，掩饰自生的问题）。如果我有这些条件，我也可以做到</em>。富人的思维习惯是：他们做到了，我为什么没做到，我怎么才能做到?（正视自身薄弱点，充分发挥主观能动性，并积极地通过理性分析和寻找各种方式弥补差距）</p>
-<p>可怜的穷人们，不打破这种自我保护的心里，是很难摆脱一事无成的宿命的。可惜，他们中的大多数一生都<del><em>沉浸在自我安慰中，从怀才不遇到壮志未酬，最终感慨平平淡淡才是真。</em></del></p>
-<h2 id="有钱人的思维是整合资源，而不是拥有现成的资源"><a href="#有钱人的思维是整合资源，而不是拥有现成的资源" class="headerlink" title="有钱人的思维是整合资源，而不是拥有现成的资源"></a>有钱人的思维是整合资源，而不是拥有现成的资源</h2><p>如果这篇文章你只能看一段，那就是这一段，没准它就能改变个别人的人生轨迹。</p>
-<p>其实很多穷人也不是甘心于一辈子领薪水的啊，他们只是在等机会，他们<small>永远在等机会</small>。</p>
-<p>“我在美国留学的时候，惊人地发现原来每个留学生和他们的父母心里其实也都有一条走上人生巅峰的道路嘛。本科认真学习，积极参加课外活动，拓展社交网络，最终成绩优异简历丰富，找到一个大公司工作几年积累工作经验，继续名校MBA深造，出任跨国公司高级管理人员，最终调回国内担任中国区经理，甚至<del>时机成熟了</del>，凭借多年工作积累的经验和人脉，跳出来单飞最终创业成功。”</p>
-<p>听起来如此酣畅淋漓的人生攻略，其实是最经典的穷人思维，穷人总以为有钱人的每一步都是<em>按部就班顺水推舟得来的，所以要等着一切时机都成熟了，一切资源都获取了，才能开始行动</em>。</p>
-<p>他们无法理解的是，世界上还有另外一小撮人，和他们拥有类似的客观条件，但却把他们觉得遥不可及的事情做起来了。这一小撮人，没有本金，找朋友借钱找投资人投资甚至找银行贷款；没有技术，自己去现学或者找到懂技术的人帮自己来做；没有关系，找人介绍请人吃饭送礼屡败屡战；没有客户，一个一个冷拨电话登门拜访甚至办公室门口堵着。上面这种人，就是传说中的老板。（正视自身薄弱点，充分发挥主观能动性，并积极地通过理性分析和寻找各种方式弥补差距 。整合资源，而不是拥有现成的资源）</p>
-<p>按照穷人的万事俱备才能行动的思维，聚美优品的创业过程应该是这样：</p>
-<p>陈欧同学大学时期学习的是快消品营销，斯坦福MBA毕业后进入丝芙兰美国总部担任销售高管，工作五年之后跳槽到天猫国际任化妆品频道总监，在天猫又干了几年之后，掌握了大量供货商资源，打造了一个优秀的电商运营团队，在化妆品行业侵染了20多年后，终于在2026年成立了聚美优品。然后…</p>
-<p>聚美优品的实际创业过程这里就不细表了，微博上已经写的太多了，可无论陈老板的之前经历作假也好，波士堂上装逼也罢，还是他家里多有钱真格基金给他提供了多少关系，他又如何运气好赶上了垂直化电商爆发的前夜，仅仅是他决定去做化妆品电商这一件事，勇气和魄力就远远超越了多少客观条件跟他相仿甚至更好的人。</p>
-<p>其实，当你真正开始做一个整合资源的老板的时候就会发现，你之前自以为拥有的资源和人脉远没有你想的那么好用，任何一个商业活动从无到有，都必然要经历那些团队不整没有客户的阶段，滴滴打车两年前还在在北京机场T3一个一个拽着出租车司机下载App;以雷军在互联网圈二十多年的人脉，创立小米的时候光一个个登门挖人就挖了近一年，相比之下，你觉得自己能有的那些资源又能有多管用呢?切记，老板的实质是寻找资源然后整合资源的人，并不是拥有现成资源的人。</p>
-<p>更进一步说，一切商业机会都包含了大量的未知因素，而鉴于人类对于一个未知事物的群体接受度的判断力是极其有限的，一个优秀的老板擅长的是边做根据形势快速调整自己的商业活动，而不是事先把一切事情都预料好了。你能想象亚马逊的创始人当年在网上卖书的时候，已经计划好了公司的业务要包括电子阅读器，电商，流媒体，云计算，无人机吗?</p>
-<p>为什么穷人等待的机会永远不会到来?等你把一切都看的清清楚楚的时候，市场早已经被那些趁着一切并不明朗就冲进去的人瓜分干净了。真正的好机会，永远都存在与未知中。同样的道理并非只存在于商业世界，每个人生活中最好的机会，几乎都出现在那些你没有完全准备好的时候。</p>
-<p>还记得刚去美国的时候，我听说高中的数学课代表去新东方做了托福老师，班里的同学谈起这件事，语气中大多充满了怀疑和嘲讽，因为大家都清楚他高中的时候学习好是因为数理化成绩优异，英语水平根本不行。他们想的一点没错，后来我才得知，这哥们当时连托福都没考过，但就是一咬牙硬着头皮上去应聘还成功了，结果最初过得心惊胆战，做梦都怕被学生从讲台上赶下来，于是每天疯狂的做题备课恶补英语，好不容易坚持了下来。</p>
-<p>而两年之后，嘲讽他的人还是当年的样子，他已经成了新东方的托福名师，公开课出现在新东方官网上，学生遍布北美。后来我默默地在家里看了他的讲课视频，比起我当年崇拜的那些新东方名师毫不逊色。我忽然想起了罗永浩当年写给俞敏洪的求职信，试想如果罗老师当年认为要把英语练到王强老师一样才能敢去新东方应聘，现在可能也只是一个吉林延边的文艺老愤青罢。</p>
-<p>你看，真正把事情做起来的人，考虑的问题的过程其实是这样的，这件事我一定要做，缺什么东西我去想办法去争取。而什么做不起来的人，永远在等待时机成熟。</p>
-<p>只有在实践中摔打过才知道，牛逼的商业理论可以让企业从1发展到10000，可以让创业者在经营的路上少走很多弯路，可以帮其他成型的企业的做商业咨询分析，但是对于一个渴望无中生有开展一段成功的商业活动的人而言，寻找资源并整合资源的能力才是从0到1的根本，它和任何具体的知识都没有关系，而是源于突破舒适区的决心，不屈不挠解决问题的耐心，愿赌服输的魄力。简而言之，它是一股不安于现状，相信主观能动性可以超越客观条件的，比性欲还强烈的内心驱动力。</p>
-<p>无论是工作还是生活，成功的人必然是有勇有谋，但勇又大于谋。相比之下，勤奋专注聪明简直只能算雕虫小技，唯有勇气才是一个人出类拔萃的核心竞争力。</p>
-<h2 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h2><p>如果你的抽象思维能力实在有限，必须得看十分具体的例子去理解究竟什么才是寻找资源并整合资源，强烈推荐你上网看两个故事，一个是星巴克老板舒尔茨当年在西雅图开第一家咖啡店的始末，另一个是杨洁导演拍摄86版西游记的过程。</p>
-<p>以上，就是我在读了这么多年书，看了那么多案例，和自己在残酷的实践中，能给出的关于“不是富二代，不是官二代，很想成功，是不是就会成功了”的最好答案。至于你觉得它是醍醐灌顶还是勾兑鸡汤，看你的了。</p>
-]]></content>
-      <categories>
-        <category>心灵成长</category>
-      </categories>
-      <tags>
-        <tag>富人思维</tag>
       </tags>
   </entry>
   <entry>
@@ -3333,6 +3333,59 @@
       </tags>
   </entry>
   <entry>
+    <title>钱穆：读书与做人</title>
+    <url>/2021/01/28/ReadingAndBeingAMan/</url>
+    <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/QianMu.jpg" class="full-image" />
+
+<div class="note success"><p>钱穆（1895年7月30日-1990年8月30日），字宾四，笔名公沙，江苏省无锡人，中国现代历史学家。<br>其毕生弘扬中国传统文化，高举现代新儒家的旗帜，创办了新亚书院，与吕思勉、陈垣、陈寅恪并称为“史学四大家”，代表著作有《钱宾四先生全集》等。</p>
+</div>
+
+<p>本文转自钱穆先生在二十世纪六十年代应邀在复兴中国文化会第十次学术会议中发表的演讲《读书与做人》。原文如下，妄自在钱穆先生演讲中加上小标题以便网页快速定位，还望包涵！</p>
+<a id="more"></a>
+
+<h1 id="（引言）"><a href="#（引言）" class="headerlink" title="（引言）"></a>（引言）</h1><p>今天在这讲堂里有年青的同学，有中年人，更有老年人；真是一次很有价值、很有意义的盛会。如按年岁来排，便可分三班；所以讲话就比较难。因为所讲如是年青人比较喜欢的，可能年长的不大爱听；反之亦然。现在我准备所讲将以年长人为主，因为年青人将来还得做大人；但年老了，却不能复为青年人。并且年幼的都当敬重年老的，这将好让将来的青年人也敬重你们。至于年老的人，都抱着羡慕你们年青人的心情，自然已值得年青人骄傲了。</p>
+<h1 id="（至死学做一个高标准的人）"><a href="#（至死学做一个高标准的人）" class="headerlink" title="（至死学做一个高标准的人）"></a>（至死学做一个高标准的人）</h1><p>我今天的讲题是“读书与做人”，实在对年青人也有关。婴孩一出世，就是一个人，但还不是我们理想中要做的一个人。我们也不能因为日渐长大成人了，就认为满足；人仍该要自己做。所谓做人，是要做一个理想标准高的人。这须自年幼时即学做；即使已届垂暮之年，仍当继续勉学、努力做。所谓“学到老，做到老”，做人工夫无止境。学生在学校读书，有毕业时期；但做人却永不毕业——临终一息尚存，他仍是一人，即仍该做；所以做人须至死才已。</p>
+<h1 id="（读书与做人的关系）"><a href="#（读书与做人的关系）" class="headerlink" title="（读书与做人的关系）"></a>（读书与做人的关系）</h1><p>现在讲到读书。因为只有在书上可以告诉我们如何去做一个有理想高标准的人；诸位在学校读书，主要就是要学做人；即如做教师的亦然。固然做教师可当是一职业；但我们千万不要以为职业仅是为谋生，当知职业也在做人道理中。做人理当有职业，以此贡献于社会。人生不能无职业，这是从古到今皆然的。但做一职业，并不即是做人之全体，而只是其一部分。学生在校求学，为的是为他将来职业作准备。然而除在课堂以外；如在宿舍中，或是在运动场上，也都是在做人，亦当学。在课堂读书求学，那只是学做人的一部分；将来出了学校，有了职业，还得要做人。做人圈子大，职业圈子小。做人当有理想，有志愿。这种理想与志愿，藏在各人内心，别人不能见，只有他自己才知道。因此，读书先要有志；其次，当能养成习惯，离开了学校还能自己不断读书。读书亦就是做人之一部分，因从读书可懂得做人的道理，可使自己人格上进。</p>
+<h1 id="（狭义读书与业余读书）"><a href="#（狭义读书与业余读书）" class="headerlink" title="（狭义读书与业余读书）"></a>（狭义读书与业余读书）</h1><p>惟在离开了学校以后的读书，实与在学校里读书有不同。在学校里读书，由学校课程硬性规定，要笔记、要考试，战战兢兢，担心不及格，不能升级、不能毕业，好像在为老师而读书，没有自己的自由；至于离了学校，有了职业，此时再也没有讲堂，也没有老师了，此时再读书，全是自由的，各人尽可读各人自己喜欢的书。当知：在学校中读书，只是为离学校求职业作准备。这种读书并不算真读书。如果想做一位专门学者，这是他想以读书为职业；当知此种读书，亦是做人中一小圈子。我们并不希望，而且亦不大可能要人人尽成为学者。我此所讲，乃指我们离开学校后，不论任何职业、任何环境而读书，这是一种业余读书，这种读书，始是属于人生的大圈子中尽人应有之一事；必需的，但又是自由的。今问此种读书应如何读法？下面我想提出两个最大的理想、最共同的目标来：</p>
+<h1 id="（业余读书的最大理想与追求？）"><a href="#（业余读书的最大理想与追求？）" class="headerlink" title="（业余读书的最大理想与追求？）"></a>（业余读书的最大理想与追求？）</h1><h2 id="（培养情趣）"><a href="#（培养情趣）" class="headerlink" title="（培养情趣）"></a>（培养情趣）</h2><p>一是培养情趣。人生要过得愉快、有趣味，这需用工夫去培养。社会上甚至有很多人怕做人了，他觉得人生乏味，对人生发生厌倦，甚至于感到痛苦。譬如：我们当教师，有人觉得当教师是不得已，只是为谋生，只是枯燥沉闷，挨着过日子。但当知：这非教师做不得，只是他失了人生的情趣了。今试问：要如何才能扭转这心理，使他觉得人生还是有意义有价值？这便得先培养他对人生的情趣；而这一种培养人生情趣的工夫，莫如好读书。</p>
+<h2 id="（提高境界）"><a href="#（提高境界）" class="headerlink" title="（提高境界）"></a>（提高境界）</h2><p>二是提高境界。所谓境界者，例如这讲堂，在调景岭村中，所处地势，既高又宽敞，背山面海；如此刻晴空万里，海面归帆遥驶，或海鸥三五，飞翔碧波之上；如开窗远眺，便觉眼前呈露的，乃是一片优美境界，令人心旷神怡。即或朗日已匿，阴雨晦冥，大雾迷蒙，亦仍别有一番好景。若说是风景好，当知亦从境界中得来；若换一境界，此种风景也便不可得。居住有境界，人生亦有境界；此两种境界并不同。并非住高楼美屋的便一定有高的、好的人生境界，住陋室茅舍的便没有。也许住高楼华屋，居住境界好，但他的人生境界并不好。或许住陋室茅舍，他的居住环境不好，而他的人生境界却尽好。要知人生境界别有存在。这一层，或许对青年人讲，一时不会领会，要待年纪大了、经验多、读书多才能体会到此。我们不是总喜欢过舒服快乐的日子吗？当知人生有了好的高的境界，他做人自会多情趣，觉得快活舒适。若我们希望能到此境界，便该好好学做人；要学做人，便得要读书。</p>
+<h1 id="（读书为何能提高境界？）"><a href="#（读书为何能提高境界？）" class="headerlink" title="（读书为何能提高境界？）"></a>（读书为何能提高境界？）</h1><p>为什么读书便能学得做一个高境界的人呢？因为在书中可碰到很多人，这些人的人生境界高、情味深，好做你的榜样。目前在香港固然有三百几十万人之多，然而我们大家的做人境界却不一定能高，人生情味也不一定能深。我们都是普通人，但在书中遇见的人可不同；他们是由千百万人中选出，又经得起长时间的考验而保留以至于今日，像孔子，距今已有二千六百年，试问中国能有几个孔子呢？又如耶稣，也快达二千年；他如释迦牟尼、穆罕默德等人。为什么我们敬仰崇拜他们呢？便是由于他们的做人。当然，历史上有不少人物，他们都因做人有独到处，所以为后世人所记忆，而流传下来了。世间决没有中了一张马票，成为百万富翁而能流传后世的。即使做大总统或皇帝，亦没有很多人能流传让人记忆，令人向往。中国历代不是有很多皇帝吗？但其中大多数，全不为人所记忆，只是历史上有他一名字而已。哪里有读书专来记人姓名的呢？做皇帝亦尚无价值，其余可知。中马票固是不足道；一心想去外国留学、得学位，那又价值何在、意义何在呀？当知论做人，应别有其重要之所在。假如我们诚心想做一人，“培养情趣，提髙境界”，只此八个字，便可一生受用不尽；只要我们肯读书，能遵循此八个字来读，便可获得一种新情趣，进入一个新境界。各位如能在各自业余每天不断读书，持之以恒，那么长则十年二十年，短或三年五年，便能培养出人生情趣，提高了人生境界。那即是人生之最大幸福与最高享受了。</p>
+<h1 id="（读书的选择？）"><a href="#（读书的选择？）" class="headerlink" title="（读书的选择？）"></a>（读书的选择？）</h1><p>说到此，我们当再进一层来谈一谈读书的选择。究竟当读哪些书好？我认为：业余读书，大致当分下列数类：</p>
+<h2 id="（修养类的书）"><a href="#（修养类的书）" class="headerlink" title="（修养类的书）"></a>（修养类的书）</h2><p>一是修养类的书。所谓修养，犹如我们栽种一盆花，需要时常修剪枝叶，又得施肥浇水；如果偶有三五天不当心照顾，便决不会开出好花来，甚至根本不开花，或竟至枯死了。栽花尚然，何况做人！当然更须加倍修养。<br>中国有关人生修养的几部书是人人必读的。首先是论语。切不可以为我从前读过了，现在毋须再读。正如天天吃饭一样，不能说今天吃了，明天便不吃；好书也该时时读。再次是孟子。孔孟这两部书，最简单，但也最宝贵。如能把此两书经常放在身边，一天读一二条，不过化上三五分钟，但可得益无穷。此时的读书，是各人自愿的，不必硬求记得，也不为应考试，亦不是为着要做学问专家或是写博士论文；这是极轻松自由的，只如孔子所言“默而识之”便得。只这样一天天读下，不要以为没有什么用；如像诸位毎天吃下许多食品，不必也不能时时去计算在里面含有多少维他命，多少卡路里，只吃了便有益；读书也是一样。这只是我们一种私生活，同时却是一种高尚享受。</p>
+<p>孟子曾说过：“君子有三乐，而王天下不与存焉。”连做皇帝王天下都不算乐事；那么，看电影、中马票，又算得什么？但究竟孟子所说的那三件乐事是什么？我们不妨翻读一下孟子，把他的话仔细想一想，那实在是有意义的。人生欲望是永远不会满足的；有人以为月入二百元能加至二百五十元就会有快乐；哪知等到你如愿以偿，你始觉得仍然不快乐——即使王天下，也一样会不快乐。我们试读历史，便知很多帝王比普通人活得更不快乐。做人确会有不快乐，但我们不能就此便罢，我们仍想寻求快乐。人生的真快乐，我劝诸位能从书本中去找；只化三两块钱到书店中去，便可买到论语孟子；即使一天读一条，久之也有无上享受。</p>
+<p>还有一部老子，全书只五千字。一部庄子，篇幅较巨，文字较深，读来比较难；但我说的是业余读书，尽可不必求全懂。要知：即是一大学者，他读书也会有不懂的；何况我们是业余读书；等于放眼看窗外风景，或坐在巴士轮渡中欣赏四周景物，随你高兴看什么都好，不一定要全把外景看尽了，而且是谁也看不尽。还有一部佛教禅宗的六祖坛经，是用语体文写的，内中故事极生动，道理极深邃，化几小时就可一口气读完，但也可时常精读。其次，还有朱子的近思录与阳明先生的传习录。这两部书，篇幅均不多，而且均可一条条分开读。爱读几条便几条。我常劝国人能常读上述七部书。中国传统所讲修养精义，已尽在其内。而且此七书不论你做何职业，生活如何忙，都可读。今天在座年幼的同学们，只盼你们记住这几部书名，亦可准备将来长大了读。如果大家都能毎天抽出些时间来，有恒地去读这七部书，准可叫我们脱胎换骨，走上新人生的大道去。</p>
+<h2 id="（欣赏类的书）"><a href="#（欣赏类的书）" class="headerlink" title="（欣赏类的书）"></a>（欣赏类的书）</h2><p>其次便是欣赏类的书。风景可以欣赏，电影也可以欣赏，甚至品茶喝咖啡，都可有一种欣赏。我们对人生本身也需要欣赏，而且需要能从高处去欣赏。最有效的莫如读文学作品，尤要在读诗。这并非要求大家都做一个文学家；只要能欣赏。谚语有云：“熟读唐诗三百首，不会做诗也会吟。”诗中境界，包罗万象；不论是自然部分，不论是人生部分，中国诗里可谓无所不包；一年四季，天时节令，一切气候景物，乃至飞潜动植，一枝柳，一瓣花，甚至一条村狗或一只令人讨厌的老鼠，都进入诗境，经过诗人笔下晕染，都显出一番甚深情意，趣味无穷；进入人生所遇喜怒哀乐，全在诗家作品中。当我们读诗时，便可培养我们欣赏自然，欣赏人生，把诗中境界成为我们心灵欣赏的境界。如能将我们的人生投放沉浸在诗中，那真趣味无穷。<br>如陶渊明诗：</p>
+<blockquote class="blockquote-center">
+<p><strong>犬吠深巷中，鸡鸣桑树巅。</strong></p>
+
+</blockquote>
+<p>这十个字，岂非我们在穷乡僻壤随时随地可遇到！但我们却忽略了其中情趣。经陶诗一描写，却把一幅富有风味的乡村闲逸景象活在我们眼前了。我们能读陶诗，尽在农村中过活，却可把我们带进人生最高境界中去，使你如在诗境中过活，那不好吗？</p>
+<p>又如王维诗：</p>
+<blockquote class="blockquote-center">
+<p><strong>雨中山果落，灯下草虫鸣。</strong></p>
+
+</blockquote>
+<p>诸位此刻住山中，或许也会接触到这种光景：下雨了，宅旁果树上，一个个熟透了的果子掉下来，可以听到“扑”“扑”的声音；草堆里小青虫经着雨潜进窗户来了，在灯下唧唧地鸣叫着。这是一个萧瑟幽静的山中雨夜，但这诗中有人。上面所引陶诗，背后也有人。只是一在山中，一在村中；一在白天，一在晚上。诸位多读诗，不论在任何境遇中，都可唤起一种文学境界，使你像生活在诗中，这不好吗？</p>
+<p>纵使我们也有不能亲历其境的，但也可以移情神游，于诗中得到一番另外境界，如唐诗：</p>
+<blockquote class="blockquote-center">
+<p><strong>松下问童子，言师采药去；只在此山中，云深不知处。</strong></p>
+
+</blockquote>
+<p>那不是一幅活的人生画像吗？那不是画的人，却是画的人生。那一幅人生画像，活映在我们眼前，让我们去欣赏。在我想，欣赏一首诗，应比欣赏一张电影片有味，因其更可使我们长日神游，无尽玩味。不仅诗如此，即中国散文亦然。诸位纵使只读一本唐诗三百首、只读一本古文观止也好；当知我们学文学，并不为自己要做文学家。因此，不懂诗韵平仄，仍可读诗。读散文更自由。学文学乃为自己人生享受之用，在享受中仍有提髙自己人生之收获，那真是人生一秘诀。</p>
+<h2 id="（博闻类的书）"><a href="#（博闻类的书）" class="headerlink" title="（博闻类的书）"></a>（博闻类的书）</h2><p>第三是博闻类。这类书也没有硬性规定；只求自己爱读，史传也好，游记也好，科学也好，哲学也好，性之所近，自会乐读不倦，增加学识，广博见闻，年代一久，自不寻常。</p>
+<h2 id="（新知类的书）"><a href="#（新知类的书）" class="headerlink" title="（新知类的书）"></a>（新知类的书）</h2><p>第四是新知类。我们生在这时代，应该随时在这时代中求新知。这类知识，可从现代出版的期刊杂志上，乃至报章上找到。这一类更不必详说了。</p>
+<h2 id="（消遣类的书）"><a href="#（消遣类的书）" class="headerlink" title="（消遣类的书）"></a>（消遣类的书）</h2><p>第五是消遣类。其实广义说来，上面所提，均可作为消遣；因为这根本就是业余读书，也可说即是业余消遣。但就狭义说之，如小说、剧本、传奇等，这些书便属这一类。如诸位读水浒传、三国演义、红楼梦，可作是消遣。</p>
+<h1 id="（何时读书？）"><a href="#（何时读书？）" class="headerlink" title="（何时读书？）"></a>（何时读书？）</h1><p>上面已大致分类说了业余所当读的书。但诸位或说生活忙迫，能在什么时读呢？其实人生忙，也是应该的；只在能利用空闲，如欧阳修的三上，即：枕上、厕上和马上。上床了，可有十分一刻钟睡不着；上洗手间，也可顺便带本书看看；今人不骑骡马，但在舟车上读书，实比在马上更舒适。古人又说三余：冬者岁之余，夜者日之余，阴者晴之余。现在我们生活和古人不同；但每人必有很多零碎时间，如：清晨早餐前，傍晚天黑前，又如临睡前；一天便有三段零碎时间了。恰如一块布，裁一套衣服以后，余下的零头，大可派作别的用场。另外，还有周末礼拜天，乃及节日和假期；尤其是做教师的还有寒暑假。这些都可充分利用，作为业余读书时间的。假如毎日能节约一小时，十年便可有三千六百个小时。又如一个人自三十岁就业算起，到七十岁，便可节余一万四千四百个小时，这不是一笔了不得的大数目吗？现在并不是叫你去吃苦做学问，只是以读书为娱乐和消遣，亦像打麻雀、看电影，哪会说没有时间的！如果我们读书也如打麻雀、看电影般有兴趣、有习惯，在任何环境任何情况下都可读书。这样，便有高的享受，有好的娱乐，岂非人生一大佳事！读书只要有恒心，自能培养出兴趣，自能养成为习惯，从此可以提髙人生境界。这是任何数量的金钱所买不到的。</p>
+<h1 id="（倡导读书）"><a href="#（倡导读书）" class="headerlink" title="（倡导读书）"></a>（倡导读书）</h1><p>今日香港社会读书空气实在太不够，中年以上的人，有了职业，便不再想到要进修，也不再想到业余还可再读书。我希望诸位能看重此事，也不妨大家合作，有书不妨交换读，有意见可以互相倾谈。如此，更易培养出兴趣。只消一年时间，习惯也可养成。我希望中年以上有职业的人能如此，在校的青年们他日离了学校亦当能如此，那真是无上大佳事。循此以往，自然人生境界都会高，人生情味都会厚。人人如此，社会也自成为一好社会。我今天所讲，并不是一番空泛的理论，只是我个人的实际经验。今天贡献给各位，愿与大家都分享这一份人生的无上宝贵乐趣。</p>
+]]></content>
+      <categories>
+        <category>心灵成长</category>
+      </categories>
+      <tags>
+        <tag>阅读</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>基于Hexo的上传博文Markdown文章写作格式＆语法</title>
     <url>/2018/08/31/write-a-md-file/</url>
     <content><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="/assets/css/APlayer.min.css"><script src="/assets/js/APlayer.min.js" class="aplayer-secondary-script-marker"></script><img data-src="https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/write-a-md-file.jpg" class="full-image" />
@@ -3422,22 +3475,31 @@
 <!-- HTML方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="blockquote-center" 是必须的 -->
 <blockquote class="blockquote-center">HTML引用方式</blockquote>
-### 标签引用方式:
-使用<code>centerquote</code>或者<code>cq<code>
+
+<h3 id="标签引用方式"><a href="#标签引用方式" class="headerlink" title="标签引用方式:"></a>标签引用方式:</h3><p>使用<code>centerquote</code>或者<code>cq</code></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- 标签 方式，要求版本在0.4.5或以上 --&gt;</span><br><span class="line">&#123;% centerquote %&#125;标签引用方式1&#123;% endcenterquote %&#125;</span><br><span class="line">&lt;!-- 标签别名 --&gt;</span><br><span class="line">&#123;% cq %&#125;标签引用方式2&#123;% endcq %&#125;</span><br></pre></td></tr></table></figure>
 <!-- 标签 方式，要求版本在0.4.5或以上 -->
-&#123;% centerquote %&#125;标签引用方式1&#123;% endcenterquote %&#125;
+<blockquote class="blockquote-center">
+<p>标签引用方式1</p>
+
+</blockquote>
 <!-- 标签别名 -->
-&#123;% cq %&#125;标签引用方式2&#123;% endcq %&#125;
+<blockquote class="blockquote-center">
+<p>标签引用方式2</p>
+
+</blockquote>
 
 <h2 id="突破容器宽度限制的图片引用"><a href="#突破容器宽度限制的图片引用" class="headerlink" title="突破容器宽度限制的图片引用"></a>突破容器宽度限制的图片引用</h2><p>当使用此标签引用图片时，图片将自动扩大26%，并突破文章容器的宽度。此标签使用于需要突出显示的图片,图片的扩大与容器的偏差从视觉上提升图片的吸引力。此标签有两种调用方式（详细参看底下示例）：</p>
 <h3 id="HTML引用图片方式"><a href="#HTML引用图片方式" class="headerlink" title="HTML引用图片方式"></a>HTML引用图片方式</h3><p>使用这种方式时，为<code>img</code>添加属性<code>class="full-image"</code>即可</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;!-- HTML引用图片方式: 直接在 Markdown 文件中编写 HTML 来调用 --&gt;</span><br><span class="line">&lt;!-- 其中 class&#x3D;&quot;full-image&quot; 是必须的 --&gt;</span><br><span class="line">&lt;img src&#x3D;&quot;https:&#x2F;&#x2F;cdn.wfolio.ru&#x2F;w&#x2F;4b318a3da2f7d3a89fa5957a8dd9a00dd2609616&#x2F;m_limit%2Cw_1920&#x2F;sites&#x2F;181&#x2F;assets&#x2F;1524794399_7fc3ff.jpg&quot; class&#x3D;&quot;full-image&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
 <!-- HTML引用图片方式: 直接在 Markdown 文件中编写 HTML 来调用 -->
 <!-- 其中 class="full-image" 是必须的 -->
+
 <img data-src="https://cdn.wfolio.ru/w/4b318a3da2f7d3a89fa5957a8dd9a00dd2609616/m_limit%2Cw_1920/sites/181/assets/1524794399_7fc3ff.jpg" class="full-image" />
 
-<h1 id="Bootstrap-Callout"><a href="#Bootstrap-Callout" class="headerlink" title="Bootstrap Callout"></a>Bootstrap Callout</h1><p>这些样式出现在<a href="http://getbootstrap.com/">Bootstrap官方文档</a>中。<br><strong>使用方式</strong></p>
+
+<h1 id="Bootstrap-Callout"><a href="#Bootstrap-Callout" class="headerlink" title="Bootstrap Callout"></a>Bootstrap Callout</h1><p>这些样式出现在<a href="http://getbootstrap.com/">Bootstrap官方文档</a>中。</p>
+<p><strong>使用方式</strong></p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% note class_name %&#125; Content (md partial supported) &#123;% endnote %&#125;</span><br></pre></td></tr></table></figure>
 <p>其中，<code>class_name</code>可以是以下一个值：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">default</span><br><span class="line">primary</span><br><span class="line">success</span><br><span class="line">info</span><br><span class="line">warning</span><br><span class="line">danger</span><br></pre></td></tr></table></figure>
@@ -3456,27 +3518,9 @@
 <div class="note danger"><p>6.danger效果</p>
 </div>
 
-<h1 id="Next-主题自带样式-note-标签"><a href="#Next-主题自带样式-note-标签" class="headerlink" title="Next 主题自带样式 note 标签"></a>Next 主题自带样式 note 标签</h1><p>摘自 <a href="https://reuixiy.github.io/technology/computer/computer-aided-art/2017/06/09/hexo-next-optimization.html#%E6%9B%B4%E6%96%B0%E4%B8%BB%E9%A2%98">reuixiy</a>的博客。在主题配置文件<code>_config.yml</code>里有一个关于这个的配置，但官方文档没有提供 HTML 的使用方式，HTML方式更简单，也不会产生一些奇怪的显示bug</p>
-<div class="note default"><p>default</p></div>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;note default&quot;&gt;&lt;p&gt;default&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<div class="note primary"><p>primary</p></div>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;note primary&quot;&gt;&lt;p&gt;primary&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<div class="note success"><p>success</p></div>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;note success&quot;&gt;&lt;p&gt;success&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<div class="note info"><p>info</p></div>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;note info&quot;&gt;&lt;p&gt;info&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<div class="note warning"><p>warning</p></div>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;note warning&quot;&gt;&lt;p&gt;warning&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<div class="note danger"><p>danger</p></div>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;note danger&quot;&gt;&lt;p&gt;danger&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-<div class="note danger no-icon"><p>danger no-icon</p></div>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;div class&#x3D;&quot;note danger no-icon&quot;&gt;&lt;p&gt;danger no-icon&lt;&#x2F;p&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure>
-在主题配置文件中需要配置一下:
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gedit &#x2F;你的Hexo站点目录&#x2F;themes&#x2F;next&#x2F;_config.yml</span><br><span class="line"># Note tag (bs-callout).</span><br><span class="line">note:</span><br><span class="line">  # 风格</span><br><span class="line">  style: flat</span><br><span class="line">  # 要不要图标</span><br><span class="line">  icons: true</span><br><span class="line">  # 圆角矩形</span><br><span class="line">  border_radius: 3</span><br><span class="line">  light_bg_offset:</span><br></pre></td></tr></table></figure>
-# 主题自带样式 label 标签
-首先需要在主题配置文件中有配置，需要配置下
+<h1 id="主题自带样式-label-标签"><a href="#主题自带样式-label-标签" class="headerlink" title="主题自带样式 label 标签"></a>主题自带样式 label 标签</h1><p>首先需要在主题配置文件中有配置，需要配置下</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gedit &#x2F;你的Hexo站点目录&#x2F;themes&#x2F;next&#x2F;_config.yml</span><br><span class="line"># Label tag.</span><br><span class="line">label: true</span><br></pre></td></tr></table></figure>
-效果如下：(目前存在一个 bug，如果把它加在一段文字的段首，则会有点问题，issue 页面。)
+<p>效果如下：(目前存在一个 bug，如果把它加在一段文字的段首，则会有点问题，issue 页面。)</p>
 <mark class="label default">default</mark>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% label default@default %&#125;</span><br></pre></td></tr></table></figure>
 <mark class="label primary">primary</mark>
@@ -3489,9 +3533,7 @@
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% label warning@warning %&#125;</span><br></pre></td></tr></table></figure>
 <mark class="label danger">danger</mark>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% label danger@danger %&#125;</span><br></pre></td></tr></table></figure>
-# NexT主题自带样式 tabs 标签
-
-<p>在主题配置文件中有配置，需要配置下:</p>
+<h1 id="NexT主题自带样式-tabs-标签"><a href="#NexT主题自带样式-tabs-标签" class="headerlink" title="NexT主题自带样式 tabs 标签"></a>NexT主题自带样式 tabs 标签</h1><p>在主题配置文件中有配置，需要配置下:</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">gedit &#x2F;你的Hexo站点目录&#x2F;themes&#x2F;next&#x2F;_config.yml</span><br><span class="line"># Tabs tag.</span><br><span class="line">tabs:</span><br><span class="line">  enable: true</span><br><span class="line">  transition:</span><br><span class="line">    tabs: true</span><br><span class="line">    labels: true</span><br><span class="line">  border_radius: 0</span><br></pre></td></tr></table></figure>
 <p>效果如下：</p>
 <div class="tabs" id="选项卡"><ul class="nav-tabs"><li class="tab"><a href="#选项卡-1">选项卡 1</a></li><li class="tab active"><a href="#选项卡-2">选项卡 2</a></li><li class="tab"><a href="#选项卡-3">选项卡 3</a></li></ul><div class="tab-content"><div class="tab-pane" id="选项卡-1"><p><strong>这是选项卡 1</strong> 呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈呵呵哈哈哈哈哈哈哈哈……</p></div><div class="tab-pane active" id="选项卡-2"><p><strong>这是选项卡 2</strong></p></div><div class="tab-pane" id="选项卡-3"><p><strong>这是选项卡 3</strong> 哇，你找到我了!</p></div></div></div>
@@ -3508,36 +3550,41 @@
 <h2 id="方法1：可以直接用-HTML-的标签，写法如下："><a href="#方法1：可以直接用-HTML-的标签，写法如下：" class="headerlink" title="方法1：可以直接用 HTML 的标签，写法如下："></a>方法1：可以直接用 HTML 的标签，写法如下：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&lt;audio src&#x3D;&quot;https:&#x2F;&#x2F;什么什么什么.mp3&quot; style&#x3D;&quot;max-height :100%; max-width: 100%; display: block; margin-left: auto; margin-right: auto;&quot; controls&#x3D;&quot;controls&quot; loop&#x3D;&quot;loop&quot; preload&#x3D;&quot;meta&quot;&gt;Your browser does not support the audio tag.&lt;&#x2F;audio&gt;</span><br></pre></td></tr></table></figure>
 
 <h2 id="方法2：用插件，有显示歌词功能，也美观，建议使用这种方法。"><a href="#方法2：用插件，有显示歌词功能，也美观，建议使用这种方法。" class="headerlink" title="方法2：用插件，有显示歌词功能，也美观，建议使用这种方法。"></a>方法2：用插件，有显示歌词功能，也美观，建议使用这种方法。</h2><p>首先在<code>站点</code>文件夹根目录安装插件：</p>
-<figure class="highlight plain"><figcaption><span>命令执行位置：~/你的博客站点根目录/</span></figcaption><table><tr><td class="code"><pre><span class="line">npm install hexo-tag-aplayer --save</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">npm install hexo-tag-aplayer --save</span><br></pre></td></tr></table></figure>
+
 <p>然后文章中的写法：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayer &quot;歌曲名&quot; &quot;歌手名&quot; &quot;https:&#x2F;&#x2F;什么什么什么.mp3&quot; &quot;https:&#x2F;&#x2F;封面图.jpg&quot; &quot;lrc:https:&#x2F;&#x2F;歌词.lrc&quot; %&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
 <p>另外可以支持歌单：</p>
 <figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayerlist %&#125;</span><br><span class="line">&#123;</span><br><span class="line">    &quot;autoplay&quot;: false,</span><br><span class="line">    &quot;showlrc&quot;: 3,</span><br><span class="line">    &quot;mutex&quot;: true,</span><br><span class="line">    &quot;music&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;title&quot;: &quot;歌曲名&quot;,</span><br><span class="line">            &quot;author&quot;: &quot;歌手名&quot;,</span><br><span class="line">            &quot;url&quot;: &quot;https:&#x2F;&#x2F;什么什么什么.mp3&quot;,</span><br><span class="line">            &quot;pic&quot;: &quot;https:&#x2F;&#x2F;封面图.jpg&quot;,</span><br><span class="line">            &quot;lrc&quot;: &quot;https:&#x2F;&#x2F;歌词.lrc&quot;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;title&quot;: &quot;歌曲名&quot;,</span><br><span class="line">            &quot;author&quot;: &quot;歌手名&quot;,</span><br><span class="line">            &quot;url&quot;: &quot;https:&#x2F;&#x2F;什么什么什么.mp3&quot;,</span><br><span class="line">            &quot;pic&quot;: &quot;https:&#x2F;&#x2F;封面图.jpg&quot;,</span><br><span class="line">            &quot;lrc&quot;: &quot;https:&#x2F;&#x2F;歌词.lrc&quot;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line">&#123;% endaplayerlist %&#125;</span><br></pre></td></tr></table></figure>
+
 <p>效果可以见<a href="https://reuixiy.github.io/uncategorized/2010/01/01/test.html">易象辞的 Hello World</a>，里面的详细参数见<a href="https://github.com/MoePlayer/hexo-tag-aplayer">README</a> 和这插件的“母亲” Aplayer 的<a href="https://aplayer.js.org/">官方文档</a>。</p>
 <h2 id="下方测试插入音乐"><a href="#下方测试插入音乐" class="headerlink" title="下方测试插入音乐"></a>下方测试插入音乐</h2><h3 id="方式1：HTML的标签插入音乐（网易云音乐）"><a href="#方式1：HTML的标签插入音乐（网易云音乐）" class="headerlink" title="方式1：HTML的标签插入音乐（网易云音乐）"></a>方式1：HTML的标签插入音乐（网易云音乐）</h3><p>网易云音乐 -&gt; 生成外链播放器 -&gt; 复制代码 -&gt; 粘贴到md文档</p>
 <p>网易云iframe插件：</p>
 <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=414611053&auto=1&height=66"></iframe>
-网易云flash插件：
 
+<p>网易云flash插件：</p>
 <p><embed src="//music.163.com/style/swf/widget.swf?sid=414611053&type=2&auto=1&width=320&height=66" width="340" height="86"  allowNetworking="all"></embed></p>
 <h3 id="方式2：用hexo-tag-aplayer插件音乐"><a href="#方式2：用hexo-tag-aplayer插件音乐" class="headerlink" title="方式2：用hexo-tag-aplayer插件音乐"></a>方式2：用hexo-tag-aplayer插件音乐</h3><p>巧取网易云音乐mp3外链方法，不知到现在有没有被禁<br>例如：在网易云网页版点击”陈芳语-爱你”，从浏览器地址栏发现”陈芳语-爱你”的id为：22852057，则将下方代码’id=’后的数字更改为‘22852057’之后就是”陈芳语-爱你”mp3格式的外链，新建标签页粘贴该地址可直接播放，应用在博客里插入外链还是很方便的（ps:在网易云还没禁用此bug之前）。</p>
 <p>将歌词文件放在“hexo站点文件夹/source/uploads/”文件夹内，封面图、歌词文件引用地址为：<br>“<a href="https://eisenhao.github.io/uploads/%E5%B0%81%E9%9D%A2%E5%9B%BE.jpg&quot;%E3%80%81&quot;https://eisenhao.github.io/uploads/%E6%AD%8C%E8%AF%8D.lrc&quot;">https://eisenhao.github.io/uploads/封面图.jpg&quot;、&quot;https://eisenhao.github.io/uploads/歌词.lrc&quot;</a></p>
-<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 网易云网页版关于&quot;陈芳语-爱你&quot;的歌曲id&#x3D;22852057</span><br><span class="line">http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3 #可直接播放外链</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg #封面图</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc #歌词 &#x2F;&#x2F;暂时无法添加lrc歌词，只能内嵌歌词</span><br></pre></td></tr></table></figure>
-<h2 id="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："><a href="#下方测试插件插入音乐（无歌词，lrc方式歌词失效）：" class="headerlink" title="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："></a>下方测试插件插入音乐（无歌词，lrc方式歌词失效）：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayer &quot;爱你&quot; &quot;陈芳语&quot; &quot;http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg&quot; &quot;lrc:https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc&quot; %&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line"># 网易云网页版关于&quot;陈芳语-爱你&quot;的歌曲id&#x3D;22852057</span><br><span class="line">http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3 #可直接播放外链（已失效）</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg #封面图</span><br><span class="line">https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc #歌词 &#x2F;&#x2F;暂时无法添加lrc歌词，只能内嵌歌词</span><br></pre></td></tr></table></figure>
 
-        <div id="aplayer-JZrFIhYH" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+<h2 id="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："><a href="#下方测试插件插入音乐（无歌词，lrc方式歌词失效）：" class="headerlink" title="下方测试插件插入音乐（无歌词，lrc方式歌词失效）："></a>下方测试插件插入音乐（无歌词，lrc方式歌词失效）：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayer &quot;爱你&quot; &quot;陈芳语&quot; &quot;https:&#x2F;&#x2F;eisenhao.coding.net&#x2F;p&#x2F;eisenhao&#x2F;d&#x2F;eisenhao&#x2F;git&#x2F;raw&#x2F;master&#x2F;uploads&#x2F;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;loveYou.jpg&quot; &quot;lrc:https:&#x2F;&#x2F;eisenhao.github.io&#x2F;uploads&#x2F;fangyuchen_loveyou.lrc&quot; %&#125;</span><br></pre></td></tr></table></figure>
+
+
+        <div id="aplayer-UzUdIKME" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
             <pre class="aplayer-lrc-content"></pre>
         </div>
         <script>
           var ap = new APlayer({
-            element: document.getElementById("aplayer-JZrFIhYH"),
+            element: document.getElementById("aplayer-UzUdIKME"),
             narrow: false,
             autoplay: false,
             showlrc: 3,
             music: {
               title: "爱你",
               author: "陈芳语",
-              url: "http://music.163.com/song/media/outer/url?id=22852057.mp3",
+              url: "https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/22852057.mp3",
               pic: "https://eisenhao.github.io/uploads/loveYou.jpg",
               lrc: "https://eisenhao.github.io/uploads/fangyuchen_loveyou.lrc"
             }
@@ -3546,20 +3593,21 @@
           window.aplayers.push(ap);
         </script>
 
-<h2 id="下方测试插件插入内嵌音乐歌词："><a href="#下方测试插件插入内嵌音乐歌词：" class="headerlink" title="下方测试插件插入内嵌音乐歌词："></a>下方测试插件插入内嵌音乐歌词：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayerlrc &quot;爱你&quot; &quot;陈芳语&quot; &quot;http:&#x2F;&#x2F;music.163.com&#x2F;song&#x2F;media&#x2F;outer&#x2F;url?id&#x3D;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.coding.net&#x2F;p&#x2F;eisenhao&#x2F;d&#x2F;eisenhao&#x2F;git&#x2F;raw&#x2F;master&#x2F;uploads&#x2F;loveYou.jpg&quot; %&#125;</span><br><span class="line">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</span><br><span class="line">&#123;% endaplayerlrc %&#125;</span><br></pre></td></tr></table></figure>
-<div id="aplayer-ffEZPUlN" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
+<h2 id="下方测试插件插入内嵌音乐歌词："><a href="#下方测试插件插入内嵌音乐歌词：" class="headerlink" title="下方测试插件插入内嵌音乐歌词："></a>下方测试插件插入内嵌音乐歌词：</h2><figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#123;% aplayerlrc &quot;爱你&quot; &quot;陈芳语&quot; &quot;https:&#x2F;&#x2F;eisenhao.coding.net&#x2F;p&#x2F;eisenhao&#x2F;d&#x2F;eisenhao&#x2F;git&#x2F;raw&#x2F;master&#x2F;uploads&#x2F;22852057.mp3&quot; &quot;https:&#x2F;&#x2F;eisenhao.coding.net&#x2F;p&#x2F;eisenhao&#x2F;d&#x2F;eisenhao&#x2F;git&#x2F;raw&#x2F;master&#x2F;uploads&#x2F;loveYou.jpg&quot; %&#125;</span><br><span class="line">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</span><br><span class="line">&#123;% endaplayerlrc %&#125;</span><br></pre></td></tr></table></figure>
+
+<div id="aplayer-vjGhQPEJ" class="aplayer aplayer-tag-marker" style="margin-bottom: 20px;">
 				<pre class="aplayer-lrc-content">[00:00.25]Kimberley(陈芳语) - 爱你[00:06.43]我闭上眼睛 贴着你心跳呼吸[00:13.42]而此刻地球 只剩我们而已[00:20.16]你微笑的唇型 总勾着我的心[00:26.73]每一秒初吻 我每一秒都想要吻你[00:36.11]就这样 爱你 爱你 爱你 随时都要一起[00:42.43]我喜欢 爱你 外套 味道 还有你的怀里[00:49.11]把我们 衣服 钮扣 互扣 那就不用分离[00:56.49]美好爱情 我就爱这样贴近 因为你[01:16.85]有时没生气 故意闹脾气[01:23.42]你的紧张在意 让我觉得安心[01:30.04]从你某个角度 我总看见自己[01:36.76]到底你懂我 或其时我本来就像你[01:46.17]就这样 爱你 爱你 爱你 随时都要一起[01:52.70]我喜欢 爱你 外套 味道 还有你的怀里[01:59.28]把我们 衣服 钮扣 互扣 那就不用分离[02:06.80]美好爱情 我就爱这样贴近 因为你[02:17.73]想变成你的氧气 溜进你身体里[02:31.49]好好看看在你心里 你有多麽宝贝 我爱你[02:44.44]就这样 爱你 爱你 爱你 随时都要一起 （爱你）[02:49.27]我喜欢 爱你 外套 味道 还有你的怀里[02:55.92]把我们 衣服 钮扣 互扣 那就不用分离[03:03.50]美好爱情 我就爱这样贴近 因为你[03:10.28]我们爱情 会一直没有距离 最美丽</pre>
 			</div>
 			<script>
 				var ap = new APlayer({
-					element: document.getElementById("aplayer-ffEZPUlN"),
+					element: document.getElementById("aplayer-vjGhQPEJ"),
 					narrow: false,
 					autoplay: false,
 					showlrc: 2,
 					music: {
 						title: "爱你",
 						author: "陈芳语",
-						url: "http://music.163.com/song/media/outer/url?id=22852057.mp3",
+						url: "https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/22852057.mp3",
 						pic: "https://eisenhao.coding.net/p/eisenhao/d/eisenhao/git/raw/master/uploads/loveYou.jpg",
 					}
 				});
